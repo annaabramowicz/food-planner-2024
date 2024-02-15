@@ -33,8 +33,15 @@ const getRecipesSuccess = (result) => ({
 const getRecipesFail = (error) => ({ type: GET_RECIPES_FAIL, error });
 
 // THUNKS
-export const getRecipesAsyc = () => async (dispatch) => {
+export const getRecipesAsync = () => async (dispatch, getState) => {
+  const { isLoading } = getState().recipes;
+
+  if (isLoading) {
+    return;
+  }
+
   dispatch(getRecipesStarted());
+
   try {
     const result = await getRecipesFromApi();
     dispatch(getRecipesSuccess(result));
