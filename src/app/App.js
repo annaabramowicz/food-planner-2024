@@ -1,19 +1,47 @@
-import Navigation from "./Navigation/Navigation";
-import Spinner from "components/Spinner/Spinner";
-import Heading from "components/Heading/Heading";
-import routes from "routes/router";
-import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import { getRecipes, getRecipesAsync } from "store/recipes/recipes";
-import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import "reset.css";
 import NotFoundPage from "./pages/NonFoundPage/NonFoundPage";
+import Home from "./pages/Home/Home";
+import Recipes from "./pages/Recipes/Recipes";
+import Ingredients from "./pages/Ingredients/Ingredients";
+import Fridge from "./pages/Fridge/Fridge";
+import { getRecipesAsync } from "store/recipes/recipes";
+import Navigation from "./Navigation/Navigation";
+import Spinner from "components/Spinner/Spinner";
+import Heading from "components/Heading/Heading";
+
+const router = createBrowserRouter([
+  {
+    element: <Navigation />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+        errorElement: <NotFoundPage />,
+      },
+      {
+        path: "/ingredients",
+        element: <Ingredients />,
+      },
+      {
+        path: "/recipes",
+        element: <Recipes />,
+      },
+      {
+        path: "/fridge",
+        element: <Fridge />,
+      },
+    ],
+  },
+]);
 
 function App() {
   const dispatch = useDispatch();
-  const recipes = useSelector(getRecipes);
-  const { isLoading } = recipes.recipes;
+  const recipes = useSelector((state) => state.recipes);
+  const { isLoading } = recipes;
 
   useEffect(() => {
     dispatch(getRecipesAsync());
@@ -21,15 +49,10 @@ function App() {
 
   return (
     <>
-      <Heading>React Router</Heading>
-      <Navigation routes={routes} />
-      {isLoading && <Spinner />}
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.component} />
-        ))}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <RouterProvider router={router}>
+        <Heading>React Router</Heading>
+        {isLoading && <Spinner />}
+      </RouterProvider>
     </>
   );
 }
