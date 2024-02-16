@@ -8,6 +8,7 @@ import { getRecipes, getRecipesAsync } from "store/recipes/recipes";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "reset.css";
+import NotFoundPage from "./pages/NonFoundPage/NonFoundPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
         {routes.map((route) => (
           <Route key={route.path} path={route.path} element={route.component} />
         ))}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
