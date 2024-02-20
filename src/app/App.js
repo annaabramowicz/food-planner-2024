@@ -1,19 +1,17 @@
-import Navigation from "./Navigation/Navigation";
-import Spinner from "components/Spinner/Spinner";
-import Heading from "components/Heading/Heading";
-import routes from "routes/router";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
-import { getRecipes, getRecipesAsync } from "store/recipes/recipes";
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "reset.css";
-import NotFoundPage from "./pages/NonFoundPage/NonFoundPage";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+import { getRecipesAsync } from "store/recipes/recipes";
+import Spinner from "components/Spinner/Spinner";
+import Heading from "components/Heading/Heading";
+import Navigation from "./Navigation/Navigation";
 
 function App() {
   const dispatch = useDispatch();
-  const recipes = useSelector(getRecipes);
-  const { isLoading } = recipes.recipes;
+  const recipes = useSelector((state) => state.recipes);
+  const { isLoading } = recipes;
 
   useEffect(() => {
     dispatch(getRecipesAsync());
@@ -22,14 +20,9 @@ function App() {
   return (
     <>
       <Heading>React Router</Heading>
-      <Navigation routes={routes} />
+      <Navigation />
       {isLoading && <Spinner />}
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.component} />
-        ))}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Outlet />
     </>
   );
 }
