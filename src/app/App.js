@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { getRecipesAsync } from "store/recipes/recipes";
 import Spinner from "components/Spinner/Spinner";
-import Heading from "components/Heading/Heading";
 import Navigation from "./Navigation/Navigation";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
 
   return (
     <>
-      <Heading>React Router</Heading>
       <Navigation />
       {isLoading && <Spinner />}
       <Outlet />

@@ -1,5 +1,5 @@
-import Heading from "components/Heading/Heading";
+import MobileHeader from "app/MobileHeader/MobileHeader";
 
-const Fridge = () => <Heading bg="green"> Fridge </Heading>;
+const Fridge = () => <MobileHeader bg="green"> Fridge </MobileHeader>;
 
 export default Fridge;

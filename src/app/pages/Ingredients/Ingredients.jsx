@@ -1,5 +1,5 @@
-import Heading from "components/Heading/Heading";
+import MobileHeader from "app/MobileHeader/MobileHeader";
 
-const Ingredients = () => <Heading bg="blue"> Ingredients </Heading>;
+const Ingredients = () => <MobileHeader bg="blue"> Ingredients </MobileHeader>;
 
 export default Ingredients;

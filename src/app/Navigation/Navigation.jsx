@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
-import routes from "routes/routes";
+import MobileNavigation from "./MobileNavigation";
+import TabletDesktopNavigation from "./TabletDesktopNavigation";
+import Box from "components/Box/Box";
 
-const Navigation = () => (
-  <>
-    {routes.map((route) => (
-      <Link key={route.path} to={route.path}>
-        {route.title}
-      </Link>
-    ))}
-  </>
-);
+const Navigation = () => {
+  return (
+    <>
+      <Box display={{ sm: "none" }}>
+        <MobileNavigation />
+      </Box>
+      <Box display={{ base: "none", sm: "block" }}>
+        <TabletDesktopNavigation />
+      </Box>
+    </>
+  );
+};
 
 export default Navigation;

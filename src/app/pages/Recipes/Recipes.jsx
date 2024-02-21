@@ -1,5 +1,5 @@
-import Heading from "components/Heading/Heading";
+import MobileHeader from "app/MobileHeader/MobileHeader";
 
-const Recipes = () => <Heading bg="orange"> Recipes </Heading>;
+const Recipes = () => <MobileHeader bg="orange"> Recipes </MobileHeader>;
 
 export default Recipes;

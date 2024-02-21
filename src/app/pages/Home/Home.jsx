@@ -1,5 +1,5 @@
-import Heading from "components/Heading/Heading";
+import MobileHeader from "app/MobileHeader/MobileHeader";
 
-const Home = () => <Heading bg="pink"> Home </Heading>;
+const Home = () => <MobileHeader bg="pink"> Home </MobileHeader>;
 
 export default Home;
