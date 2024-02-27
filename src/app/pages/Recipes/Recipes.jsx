@@ -1,5 +1,5 @@
 import MobileHeader from "app/MobileHeader/MobileHeader";
 
-const Recipes = () => <MobileHeader bg="orange"> Recipes </MobileHeader>;
+const Recipes = () => <MobileHeader> Recipes </MobileHeader>;
 
 export default Recipes;

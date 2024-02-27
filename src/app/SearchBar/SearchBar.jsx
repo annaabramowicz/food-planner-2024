@@ -2,13 +2,6 @@ import { colorFourth } from "app/style/theme/theme";
 import Input from "components/Input/Input";
 
 const SearchBar = () => (
-
-  <Input
-    placeholder="Basic usage"
-    border="1px"
-    borderColor={colorFourth}
-    w="100px"
-    h="20px"
-  />
+  <Input placeholder="Search" borderColor={colorFourth} w="200px" />
 );
 export default SearchBar;

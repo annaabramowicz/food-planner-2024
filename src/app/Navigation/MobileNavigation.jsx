@@ -1,14 +1,17 @@
+import {
+  colorPrimary,
+  colorPrimaryDark,
+  colorSecondary,
+} from "app/style/theme/theme";
 import Flex from "components/Flex/Flex";
 import Icon from "components/Icon/Icon";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import routes from "routes/routes";
 
 const MobileNavigation = () => {
   return (
     <Flex
       bg="white"
-      borderTop="1px"
-      borderColor="orange"
       justifyContent="space-around"
       w="100%"
       h="100px"
@@ -19,15 +22,20 @@ const MobileNavigation = () => {
       zIndex={1}
     >
       {routes.map((route) => (
-        <Link key={route.path} to={route.path}>
-          <Flex
-            flexDirection="column"
-          >
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              color: isActive ? `${colorPrimary}` : `${colorSecondary}`,
+            };
+          }}
+          key={route.path}
+          to={route.path}
+        >
+          <Flex flexDirection="column" _hover={{ color: colorPrimaryDark }}>
             <Icon as={route.icon} />
-
             {route.title}
           </Flex>
-        </Link>
+        </NavLink>
       ))}
     </Flex>
   );
