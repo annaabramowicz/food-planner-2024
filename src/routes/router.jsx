@@ -10,21 +10,22 @@ const router = createBrowserRouter([
   {
     element: <App />,
     errorElement: <NotFoundPage />,
+    path: "/",
     children: [
       {
         path: "/",
         element: <Home />,
       },
       {
-        path: "/ingredients",
+        path: "ingredients",
         element: <Ingredients />,
       },
       {
-        path: "/recipes",
+        path: "recipes",
         element: <Recipes />,
       },
       {
-        path: "/fridge",
+        path: "fridge",
         element: <Fridge />,
       },
     ],
