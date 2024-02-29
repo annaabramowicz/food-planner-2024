@@ -3,7 +3,6 @@ import {
   colorFourth,
   colorPrimary,
   colorPrimaryDark,
-  colorThird,
 } from "app/style/theme/theme";
 import Box from "components/Box/Box";
 import Flex from "components/Flex/Flex";
@@ -63,7 +62,7 @@ function TabletDesktopNavigation() {
             })}
           </Flex>
         </Flex>
-        <SearchBar />
+        <SearchBar w="200px" bg="white"/>
       </Flex>
       <Box
         width="130%"

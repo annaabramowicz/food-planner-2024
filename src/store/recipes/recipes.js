@@ -51,6 +51,6 @@ export const getRecipesAsync = () => async (dispatch, getState) => {
 };
 
 //SELECTORS
-export const getRecipes = (state) => state;
+export const getAllRecipes = (state) => state.recipes;
 
 export default reducer;
