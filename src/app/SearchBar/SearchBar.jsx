@@ -11,7 +11,7 @@ import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement
 import { useLocation } from "react-router-dom";
 import { debounce } from "lodash-es";
 
-const throttleSearchIngredientsAsync = debounce(
+const debounceSearchIngredientsAsync = debounce(
   (dispatch, searchValue) => {
     dispatch(getIngredientsAsync(searchValue));
   },
@@ -22,6 +22,7 @@ const throttleSearchIngredientsAsync = debounce(
 const SearchBar = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const [newValue, setNewValue] = useState("");
 
   const placeholderIngredients = useBreakpointValue({
     base: "Search ingredients",
@@ -42,8 +43,12 @@ const SearchBar = (props) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    throttleSearchIngredientsAsync(dispatch, value);
+    setNewValue(value);
   };
+
+  useEffect(() => {
+    debounceSearchIngredientsAsync(dispatch, newValue);
+  }, [dispatch, newValue]);
 
   return (
     <InputGroup
