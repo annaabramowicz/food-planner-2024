@@ -1,21 +1,17 @@
 import IngredientsList from "app/IngredientsList/IngredientsList";
 import Spinner from "components/Spinner/Spinner";
 import { useSelector } from "react-redux";
-import { getAllIngredients } from "store/ingredients/ingredients";
-import initialIngredients from "app/IngredientsList/initialIngredients";
+import { getIngredients } from "store/ingredients/ingredients";
 
 const IngredientsPage = () => {
-  const ingredientsSearch = useSelector(getAllIngredients);
-  const ingredients = ingredientsSearch.ingredients.length
-    ? ingredientsSearch.ingredients
-    : initialIngredients;
-  const { isLoading } = ingredientsSearch;
-
+  const ingredients = useSelector(getIngredients);
+  const { isLoading } = ingredients;
+  
   return (
     <>
       Ingredients
       {isLoading && <Spinner />}
-      <IngredientsList ingredients={ingredients} />
+      <IngredientsList ingredients={ingredients.ingredients} />
     </>
   );
 };

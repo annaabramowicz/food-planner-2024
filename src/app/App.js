@@ -1,4 +1,3 @@
-import "./App.css";
 import "reset.css";
 import React from "react";
 import { useSelector } from "react-redux";

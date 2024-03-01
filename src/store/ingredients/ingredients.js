@@ -1,13 +1,14 @@
 import { getIngredientsFromApi } from "services/foodApi";
+import initialIngredients from "app/IngredientsList/initialIngredients";
 
 //initial state
-const initialState = { ingredients: [], isLoading: false };
+const initialState = { ingredients: initialIngredients, isLoading: false };
 
 //ACTION TYPES
 const NAMESPACE = "GET_INGREDIENTS_";
-const GET_INGREDIENTS_STARTED = `${NAMESPACE}GET_INGREDIENTS_STARTED`;
-const GET_INGREDIENTS_SUCCESS = `${NAMESPACE}GET_INGREDIENTS_SUCCESS`;
-const GET_INGREDIENTS_FAIL = `${NAMESPACE}GET_INGREDIENTS_FAIL`;
+const GET_INGREDIENTS_STARTED = `${NAMESPACE}STARTED`;
+const GET_INGREDIENTS_SUCCESS = `${NAMESPACE}SUCCESS`;
+const GET_INGREDIENTS_FAIL = `${NAMESPACE}FAIL`;
 
 //REDUCER
 const reducer = (state = initialState, action) => {
@@ -16,7 +17,9 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case GET_INGREDIENTS_SUCCESS:
       return {
-        ingredients: [...action.payload],
+        ingredients: action.payload?.length
+          ? [...action.payload]
+          : initialState.ingredients,
         isLoading: false,
       };
     default:
@@ -36,7 +39,6 @@ const getIngredientsFail = (error) => ({ type: GET_INGREDIENTS_FAIL, error });
 export const getIngredientsAsync =
   (searchParam) => async (dispatch, getState) => {
     const { isLoading } = getState().ingredients;
-
     if (!isLoading) {
       dispatch(getIngredientsStarted());
 
@@ -50,6 +52,6 @@ export const getIngredientsAsync =
   };
 
 //SELECTORS
-export const getAllIngredients = (state) => state.ingredients;
+export const getIngredients = (state) => state.ingredients;
 
 export default reducer;

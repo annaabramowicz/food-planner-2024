@@ -1,29 +1,48 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
-import { colorFourth, colorThird } from "app/style/theme/theme";
+import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getIngredientsAsync } from "store/ingredients/ingredients";
 import { IoSearch } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
+import { useLocation } from "react-router-dom";
+import { debounce } from "lodash-es";
+
+const throttleSearchIngredientsAsync = debounce(
+  (dispatch, searchValue) => {
+    dispatch(getIngredientsAsync(searchValue));
+  },
+  2000,
+  { leading: false }
+);
 
 const SearchBar = (props) => {
-  const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const placeholderValue = useBreakpointValue({
+  const placeholderIngredients = useBreakpointValue({
     base: "Search ingredients",
     sm: "Search",
+    md: "Search ingredients",
   });
 
-  useEffect(() => {
-    dispatch(getIngredientsAsync(searchValue));
-  }, [dispatch, searchValue]);
+  const placeholderRecipes = useBreakpointValue({
+    base: "Search recipes",
+    sm: "Search",
+    md: "Search recipes",
+  });
+
+  const placeholderValue =
+    location.pathname === "/ingredients"
+      ? placeholderIngredients
+      : placeholderRecipes;
 
   const handleChange = (e) => {
-    setSearchValue(e.target.value);
+    const value = e.target.value;
+    throttleSearchIngredientsAsync(dispatch, value);
   };
 
   return (
@@ -39,9 +58,10 @@ const SearchBar = (props) => {
       </InputLeftElement>
       <Input
         onChange={handleChange}
-        fontSize="0.9em"
         paddingLeft={10}
         placeholder={placeholderValue}
+        focusBorderColor={colorPrimary}
+        fontSize="0.9em"
       />
     </InputGroup>
   );
