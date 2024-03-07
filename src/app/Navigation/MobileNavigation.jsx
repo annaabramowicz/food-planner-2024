@@ -1,4 +1,5 @@
 import {
+  colorFourth,
   colorPrimary,
   colorPrimaryDark,
   colorSecondary,
@@ -12,6 +13,8 @@ const MobileNavigation = () => {
   return (
     <Flex
       bg="white"
+      borderTop={`1px solid ${colorFourth}`}
+
       justifyContent="space-around"
       w="100%"
       h="100px"

@@ -1,7 +1,7 @@
-import Fridge from "app/pages/Fridge/Fridge";
-import Home from "app/pages/Home/Home";
-import Ingredients from "app/pages/Ingredients/Ingredients";
-import Recipes from "app/pages/Recipes/Recipes";
+import FridgePage from "app/pages/FridgePage/FridgePage";
+import HomePage from "app/pages/HomePage/HomePage";
+import IngredientsPage from "app/pages/IngredientsPage/IngredientsPage";
+import RecipesPage from "app/pages/RecipesPage/RecipesPage";
 import {
   IoHomeOutline,
   IoCartOutline,
@@ -10,26 +10,28 @@ import {
 } from "react-icons/io5";
 
 const routes = [
-  { path: "/",
+  {
+    path: "/",
     title: "Home",
-    component: <Home />,
-    icon: IoHomeOutline },
+    component: <HomePage />,
+    icon: IoHomeOutline,
+  },
   {
     path: "/ingredients",
     title: "Ingredients",
-    component: <Ingredients />,
+    component: <IngredientsPage />,
     icon: IoCartOutline,
   },
   {
     path: "/fridge",
     title: "Fridge",
-    component: <Fridge />,
+    component: <FridgePage />,
     icon: IoJournalOutline,
   },
   {
     path: "/recipes",
     title: "Recipes",
-    component: <Recipes />,
+    component: <RecipesPage />,
     icon: IoLibraryOutline,
   },
 ];

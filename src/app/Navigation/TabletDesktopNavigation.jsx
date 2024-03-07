@@ -1,13 +1,12 @@
+import NavigationLogo from "app/NavigationLogo/NavigationLogo";
 import SearchBar from "app/SearchBar/SearchBar";
 import {
   colorFourth,
   colorPrimary,
   colorPrimaryDark,
-  colorThird,
 } from "app/style/theme/theme";
 import Box from "components/Box/Box";
 import Flex from "components/Flex/Flex";
-import Logo from "components/Logo/Logo";
 import { NavLink, useLocation } from "react-router-dom";
 import routes from "routes/routes";
 
@@ -18,11 +17,11 @@ function TabletDesktopNavigation() {
       <Flex justifyContent="space-between">
         <Flex>
           <Box display={{ base: "none", sm: "block" }}>
-            <Logo />
+            <NavigationLogo />
           </Box>
           <Flex
             justifyContent="space-evenly"
-            w={{ sm: "320px", lg: "380px" }}
+            w={{ sm: "280px", md: "380px" }}
             h="100px"
             pos="relative"
             top={0}
@@ -35,10 +34,10 @@ function TabletDesktopNavigation() {
                 location.pathname === route.path
                   ? {
                       color: { colorPrimary },
-                      borderBottom: `3px solid ${colorPrimary}`,
+                      borderBottom: `2px solid ${colorPrimary}`,
                       position: "relative",
-                      top: "21px",
-                      paddingBottom: "37px",
+                      top: "20px",
+                      paddingBottom: "38px",
                     }
                   : {};
               return (
@@ -63,7 +62,7 @@ function TabletDesktopNavigation() {
             })}
           </Flex>
         </Flex>
-        <SearchBar />
+        <SearchBar minW="105px" w="200px" bg="white"/>
       </Flex>
       <Box
         width="130%"
