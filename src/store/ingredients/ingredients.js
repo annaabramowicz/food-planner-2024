@@ -17,11 +17,11 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case GET_INGREDIENTS_SUCCESS:
       return {
-        ingredients: action.payload?.length
-          ? [...action.payload]
-          : initialState.ingredients,
+        ingredients: action.payload?.length ? [...action.payload] : [],
         isLoading: false,
       };
+    case GET_INGREDIENTS_FAIL:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

@@ -1,19 +1,20 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getIngredientsAsync } from "store/ingredients/ingredients";
 import { IoSearch } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { debounce } from "lodash-es";
 
 const debounceSearchIngredientsAsync = debounce(
-  (dispatch, searchValue) => {
+  (dispatch, searchValue, navigate) => {
     dispatch(getIngredientsAsync(searchValue));
+    navigate("/ingredients");
   },
   2000,
   { leading: false }
@@ -23,23 +24,25 @@ const SearchBar = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [newValue, setNewValue] = useState("");
+  const navigate = useNavigate();
 
-  const placeholderIngredients = useBreakpointValue({
-    base: "Search ingredients",
-    sm: "Search",
-    md: "Search ingredients",
-  });
-
-  const placeholderRecipes = useBreakpointValue({
-    base: "Search recipes",
-    sm: "Search",
-    md: "Search recipes",
-  });
+  const placeholderValues = {
+    ingredients: useBreakpointValue({
+      base: "Search ingredients",
+      sm: "Search",
+      md: "Search ingredients",
+    }),
+    recipes: useBreakpointValue({
+      base: "Search recipes",
+      sm: "Search",
+      md: "Search recipes",
+    }),
+  };
 
   const placeholderValue =
     location.pathname === "/ingredients"
-      ? placeholderIngredients
-      : placeholderRecipes;
+      ? placeholderValues.ingredients
+      : placeholderValues.recipes;
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -47,8 +50,8 @@ const SearchBar = (props) => {
   };
 
   useEffect(() => {
-    debounceSearchIngredientsAsync(dispatch, newValue);
-  }, [dispatch, newValue]);
+    newValue && debounceSearchIngredientsAsync(dispatch, newValue, navigate);
+  }, [dispatch, newValue, navigate]);
 
   return (
     <InputGroup

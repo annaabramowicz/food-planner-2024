@@ -1,16 +1,18 @@
-import { colorFourth } from "app/style/theme/theme";
 import Image from "components/Image/Image";
 import Flex from "components/Flex/Flex";
+import { colorFourth } from "app/style/theme/theme";
+import config from "config/env";
 
 const Ingredient = ({ ingredient }) => {
   const imageSize = `100x100`;
-  const imageUrl = `https://spoonacular.com/cdn/ingredients_${imageSize}/`;
+  const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
   return (
     <Flex
       flexDirection="column"
-      w={100}
+      minWidth={120}
       h={100}
-      mt={2}
+      p="0 10px"
+      m={1}
       border={`1px solid ${colorFourth}`}
       borderRadius="md"
       fontSize="0.9em"
@@ -19,8 +21,8 @@ const Ingredient = ({ ingredient }) => {
         src={`${imageUrl}${ingredient.image}`}
         alt={ingredient.name}
         objectFit="contain"
-        boxSize={50}
-        minWidth={50}
+        h="60px"
+        htmlHeight="60px"
       />
       {ingredient.name}
     </Flex>

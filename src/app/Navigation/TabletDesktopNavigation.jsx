@@ -1,3 +1,4 @@
+import NavigationLogo from "app/NavigationLogo/NavigationLogo";
 import SearchBar from "app/SearchBar/SearchBar";
 import {
   colorFourth,
@@ -17,7 +18,7 @@ function TabletDesktopNavigation() {
       <Flex justifyContent="space-between">
         <Flex>
           <Box display={{ base: "none", sm: "block" }}>
-            <Logo />
+            <NavigationLogo />
           </Box>
           <Flex
             justifyContent="space-evenly"
@@ -34,10 +35,10 @@ function TabletDesktopNavigation() {
                 location.pathname === route.path
                   ? {
                       color: { colorPrimary },
-                      borderBottom: `3px solid ${colorPrimary}`,
+                      borderBottom: `2px solid ${colorPrimary}`,
                       position: "relative",
-                      top: "21px",
-                      paddingBottom: "37px",
+                      top: "20px",
+                      paddingBottom: "38px",
                     }
                   : {};
               return (
