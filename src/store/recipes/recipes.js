@@ -19,6 +19,8 @@ const reducer = (state = initialState, action) => {
         recipes: [...state.recipes, ...action.payload],
         isLoading: false,
       };
+      case GET_RECIPES_FAIL:
+        return { ...state, isLoading: false };
     default:
       return state;
   }
@@ -51,6 +53,6 @@ export const getRecipesAsync = () => async (dispatch, getState) => {
 };
 
 //SELECTORS
-export const getAllRecipes = (state) => state.recipes;
+export const getRecipes = (state) => state.recipes;
 
 export default reducer;

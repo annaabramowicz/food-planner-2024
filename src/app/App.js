@@ -1,6 +1,6 @@
 import "reset.css";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import Spinner from "components/Spinner/Spinner";
 import Navigation from "./Navigation/Navigation";
@@ -8,11 +8,18 @@ import Box from "components/Box/Box";
 import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
+import { getRecipesAsync } from "store/recipes/recipes";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes);
   const { isLoading } = recipes;
+
+  useEffect(() => {
+    dispatch(getRecipesAsync());
+  }, [dispatch]);
+
 
   return (
     <Box
