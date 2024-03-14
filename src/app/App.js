@@ -12,14 +12,6 @@ import { getRecipesAsync } from "store/recipes/recipes";
 
 function App() {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes);
-  const { isLoading } = recipes;
-
-  useEffect(() => {
-    dispatch(getRecipesAsync());
-  }, [dispatch]);
-
 
   return (
     <Box
@@ -28,7 +20,6 @@ function App() {
       paddingBottom={{ base: "120px", sm: "0" }}
     >
       <Navigation />
-      {isLoading && <Spinner />}
       {routes.map((route) =>
         route.path === location.pathname ? (
           <MobileHeader key={route.title}> {route.title} </MobileHeader>

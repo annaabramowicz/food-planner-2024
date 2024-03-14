@@ -1,4 +1,7 @@
-import { getRecipesFromApi } from "services/foodApi";
+import {
+  getRecipesFromApi,
+  getRecipesWithParamFromApi,
+} from "services/foodApi";
 
 //initial state
 const initialState = { recipes: [], isLoading: false };
@@ -16,11 +19,13 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case GET_RECIPES_SUCCESS:
       return {
-        recipes: [...state.recipes, ...action.payload],
+        recipes: action.payload?.lenght
+          ? [...state.recipes]
+          : [...action.payload],
         isLoading: false,
       };
-      case GET_RECIPES_FAIL:
-        return { ...state, isLoading: false };
+    case GET_RECIPES_FAIL:
+      return { ...state, isLoading: false };
     default:
       return state;
   }
@@ -51,6 +56,25 @@ export const getRecipesAsync = () => async (dispatch, getState) => {
     dispatch(getRecipesFail(err));
   }
 };
+
+// THUNKS
+export const getRecipesWithParamAsync =
+  (searchParam) => async (dispatch, getState) => {
+    const { isLoading } = getState().recipes;
+
+    if (isLoading) {
+      return;
+    }
+
+    dispatch(getRecipesStarted());
+
+    try {
+      const result = await getRecipesWithParamFromApi(searchParam);
+      dispatch(getRecipesSuccess(result));
+    } catch (err) {
+      dispatch(getRecipesFail(err));
+    }
+  };
 
 //SELECTORS
 export const getRecipes = (state) => state.recipes;

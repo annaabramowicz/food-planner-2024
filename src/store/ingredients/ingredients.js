@@ -1,4 +1,4 @@
-import { getIngredientsFromApi } from "services/foodApi";
+import { getIngredientsWithParamFromApi } from "services/foodApi";
 import initialIngredients from "app/IngredientsList/initialIngredients";
 
 //initial state
@@ -43,7 +43,7 @@ export const getIngredientsAsync =
       dispatch(getIngredientsStarted());
 
       try {
-        const result = await getIngredientsFromApi(searchParam);
+        const result = await getIngredientsWithParamFromApi(searchParam);
         dispatch(getIngredientsSuccess(result));
       } catch (err) {
         dispatch(getIngredientsFail(err));

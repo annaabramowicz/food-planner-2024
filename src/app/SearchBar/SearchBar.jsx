@@ -10,11 +10,22 @@ import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
 import { useLocation, useNavigate } from "react-router-dom";
 import { debounce } from "lodash-es";
+import { getRecipesWithParamAsync } from "store/recipes/recipes";
 
 const debounceSearchIngredientsAsync = debounce(
-  (dispatch, searchValue, navigate) => {
+  (dispatch, searchValue, navigate, setInputValue) => {
     dispatch(getIngredientsAsync(searchValue));
+    setInputValue("");
     navigate("/ingredients");
+  },
+  2000,
+  { leading: false }
+);
+const debounceSearchRecipesAsync = debounce(
+  (dispatch, searchValue, navigate, setInputValue) => {
+    dispatch(getRecipesWithParamAsync(searchValue));
+    setInputValue("");
+    navigate("/recipes");
   },
   2000,
   { leading: false }
@@ -23,8 +34,8 @@ const debounceSearchIngredientsAsync = debounce(
 const SearchBar = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [newValue, setNewValue] = useState("");
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
 
   const placeholderValues = {
     ingredients: useBreakpointValue({
@@ -46,12 +57,25 @@ const SearchBar = (props) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setNewValue(value);
+    setInputValue(value);
   };
 
   useEffect(() => {
-    newValue && debounceSearchIngredientsAsync(dispatch, newValue, navigate);
-  }, [dispatch, newValue, navigate]);
+    location.pathname === "/ingredients" &&
+      inputValue &&
+      debounceSearchIngredientsAsync(
+        dispatch,
+        inputValue,
+        navigate,
+        setInputValue
+      );
+  }, [dispatch, inputValue, navigate, location.pathname]);
+
+  useEffect(() => {
+    location.pathname !== "/ingredients" &&
+      inputValue &&
+      debounceSearchRecipesAsync(dispatch, inputValue, navigate, setInputValue);
+  }, [dispatch, inputValue, navigate, location.pathname]);
 
   return (
     <InputGroup
@@ -66,6 +90,7 @@ const SearchBar = (props) => {
       </InputLeftElement>
       <Input
         onChange={handleChange}
+        value={inputValue}
         paddingLeft={10}
         placeholder={placeholderValue}
         focusBorderColor={colorPrimary}

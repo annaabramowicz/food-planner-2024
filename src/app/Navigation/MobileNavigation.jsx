@@ -21,7 +21,7 @@ const MobileNavigation = () => {
       bottom={0}
       left={0}
       right={0}
-      zIndex={2}
+      zIndex={3}
     >
       {routes.map((route) => (
         <NavLink

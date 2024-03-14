@@ -12,16 +12,12 @@ import { Icon, Tag } from "@chakra-ui/react";
 import { IoFlameOutline } from "react-icons/io5";
 
 const Recipe = ({ recipe }) => {
-  const macros = {
-    Protein: recipe.protein,
-    Fat: recipe.fat,
-    Carbs: recipe.carbs,
-  };
+  const [calories, protein, fat, carb] = recipe.nutrition.nutrients;
 
   return (
     <Box
-      maxW={{ base: "150px", sm: "215px" }}
-      h="251px"
+      maxW={{ base: "210px", sm: "255px" }}
+      height={{ base: "238px", sm: "256px" }}
       mb={2}
       border={`1px solid ${colorFourth}`}
       borderRadius="lg"
@@ -31,15 +27,16 @@ const Recipe = ({ recipe }) => {
         <Image
           src={`${recipe.image}`}
           alt={recipe.title}
+          loading="lazy"
           objectFit="cover"
-          objectPosition={{ base: "-30px -6px", sm: "-10px -14px" }}
+          objectPosition="-10px -17px"
           pos="relative"
           zIndex="-1"
-          h={{ base: "158px", sm: "172px" }}
+          height={{ base: "180px", sm: "204px" }}
         />
         <Tag
           pos="absolute"
-          bottom={{ base: 1, sm: "-62px" }}
+          bottom={{ base: 1, sm: "-101px" }}
           left={1}
           zIndex="2"
           size="sm"
@@ -50,7 +47,7 @@ const Recipe = ({ recipe }) => {
           p="0 4px 0 0"
         >
           <Icon w="20px" as={IoFlameOutline} />
-          {recipe.calories}Cal
+          {Math.floor(calories.amount)} Cal
         </Tag>
       </Box>
       <Flex
@@ -60,29 +57,22 @@ const Recipe = ({ recipe }) => {
         pos="relative"
         zIndex="1"
         bg="white"
-        h="98px"
+        h={{ base: "93px", sm: "80px" }}
+        p={1}
       >
         <Heading size="xs" p="5px 0" textAlign="left">
           {recipe.title}
         </Heading>
-        <Flex
-          justifyContent={{ base: "space-between", sm: "flex-start" }}
-          w={{ base: "145px", sm: "207px" }}
-        >
-          {Object.entries(macros).map(([key, value]) => (
-            <Tag
-              size="sm"
-              fontSize="xs"
-              variant="outline"
-              border={`1px solid ${colorPrimary}`}
-              color={colorPrimary}
-              boxShadow="none"
-              mr={{ sm: "2px" }}
-            >
-              {key}:<br />
-              {value}
-            </Tag>
-          ))}
+        <Flex justifyContent="flex-start" w={{ base: "210px", sm: "255px" }}>
+          <Tag fontSize="xs" bg="white" p={0} mr={1}>
+            Protein: {Math.floor(protein.amount)}g
+          </Tag>
+          <Tag fontSize="xs" bg="white" p={0} mr={1}>
+            Fat: {Math.floor(fat.amount)}g
+          </Tag>
+          <Tag fontSize="xs" bg="white" p={0}>
+            Carb: {Math.floor(carb.amount)}g
+          </Tag>
         </Flex>
       </Flex>
     </Box>
