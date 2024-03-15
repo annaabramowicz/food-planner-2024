@@ -5,7 +5,6 @@ import Heading from "components/Heading/Heading";
 import {
   colorFifth,
   colorFourth,
-  colorPrimary,
   colorSecondary,
 } from "app/style/theme/theme";
 import { Icon, Tag } from "@chakra-ui/react";
@@ -22,6 +21,7 @@ const Recipe = ({ recipe }) => {
       border={`1px solid ${colorFourth}`}
       borderRadius="lg"
       overflow="hidden"
+      fontWeight="bold"
     >
       <Box pos="relative" h="148px">
         <Image

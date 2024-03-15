@@ -8,10 +8,11 @@ const RecipesPage = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes);
   const { isLoading } = recipes;
+  const isRecipesEmpty = !Boolean(recipes.recipes.length) ;
 
   useEffect(() => {
-    dispatch(getRecipesAsync());
-  }, [dispatch]);
+    isRecipesEmpty && dispatch(getRecipesAsync());
+  }, [dispatch, isRecipesEmpty]);
 
   return (
     <>

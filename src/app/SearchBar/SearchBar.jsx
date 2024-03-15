@@ -3,7 +3,7 @@ import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getIngredientsAsync } from "store/ingredients/ingredients";
+import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { IoSearch } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
@@ -14,7 +14,7 @@ import { getRecipesWithParamAsync } from "store/recipes/recipes";
 
 const debounceSearchIngredientsAsync = debounce(
   (dispatch, searchValue, navigate, setInputValue) => {
-    dispatch(getIngredientsAsync(searchValue));
+    dispatch(getIngredientsWithParamAsync(searchValue));
     setInputValue("");
     navigate("/ingredients");
   },

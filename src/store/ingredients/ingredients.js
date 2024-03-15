@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-//ACTION CREATORS
+//ACTION CREATORS 
 const getIngredientsStarted = () => ({ type: GET_INGREDIENTS_STARTED });
 const getIngredientsSuccess = (result) => ({
   type: GET_INGREDIENTS_SUCCESS,
@@ -36,7 +36,7 @@ const getIngredientsSuccess = (result) => ({
 const getIngredientsFail = (error) => ({ type: GET_INGREDIENTS_FAIL, error });
 
 // THUNKS
-export const getIngredientsAsync =
+export const getIngredientsWithParamAsync =
   (searchParam) => async (dispatch, getState) => {
     const { isLoading } = getState().ingredients;
     if (!isLoading) {
