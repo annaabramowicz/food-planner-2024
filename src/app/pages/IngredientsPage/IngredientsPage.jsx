@@ -1,4 +1,4 @@
-import IngredientsList from "app/IngredientsList/IngredientsList";
+import IngredientsList from "./IngredientsList/IngredientsList";
 import Spinner from "components/Spinner/Spinner";
 import { useSelector } from "react-redux";
 import { getIngredients } from "store/ingredients/ingredients";
@@ -9,7 +9,6 @@ const IngredientsPage = () => {
   
   return (
     <>
-      Ingredients
       {isLoading && <Spinner />}
       <IngredientsList ingredients={ingredients.ingredients} />
     </>

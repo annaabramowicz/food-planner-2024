@@ -1,5 +1,5 @@
 import { getIngredientsFromApi } from "services/foodApi";
-import initialIngredients from "app/IngredientsList/initialIngredients";
+import initialIngredients from "store/ingredients/initialIngredients";
 
 //initial state
 const initialState = { ingredients: initialIngredients, isLoading: false };
