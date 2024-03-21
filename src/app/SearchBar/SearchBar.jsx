@@ -33,27 +33,21 @@ const debounceSearchRecipesAsync = debounce(
 
 const SearchBar = (props) => {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
+  const isCurrentRouteIgredients = pathname === "/ingredients";
+  console.log(isCurrentRouteIgredients);
 
-  const placeholderValues = {
-    ingredients: useBreakpointValue({
-      base: "Search ingredients",
-      sm: "Search",
-      md: "Search ingredients",
-    }),
-    recipes: useBreakpointValue({
-      base: "Search recipes",
-      sm: "Search",
-      md: "Search recipes",
-    }),
-  };
+  const searchByPlaceholder = `Search by ${
+    isCurrentRouteIgredients ? `ingredients` : `recipes`
+  }`;
 
-  const placeholderValue =
-    location.pathname === "/ingredients"
-      ? placeholderValues.ingredients
-      : placeholderValues.recipes;
+  const placeholderValues = useBreakpointValue({
+    base: searchByPlaceholder,
+    sm: "Search",
+    md: searchByPlaceholder,
+  });
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -61,7 +55,7 @@ const SearchBar = (props) => {
   };
 
   useEffect(() => {
-    location.pathname === "/ingredients" &&
+    isCurrentRouteIgredients &&
       inputValue &&
       debounceSearchIngredientsAsync(
         dispatch,
@@ -69,13 +63,13 @@ const SearchBar = (props) => {
         navigate,
         setInputValue
       );
-  }, [dispatch, inputValue, navigate, location.pathname]);
+  }, [dispatch, inputValue, navigate, isCurrentRouteIgredients]);
 
   useEffect(() => {
-    location.pathname !== "/ingredients" &&
+    !isCurrentRouteIgredients &&
       inputValue &&
       debounceSearchRecipesAsync(dispatch, inputValue, navigate, setInputValue);
-  }, [dispatch, inputValue, navigate, location.pathname]);
+  }, [dispatch, inputValue, navigate, isCurrentRouteIgredients]);
 
   return (
     <InputGroup
@@ -92,7 +86,7 @@ const SearchBar = (props) => {
         onChange={handleChange}
         value={inputValue}
         paddingLeft={10}
-        placeholder={placeholderValue}
+        placeholder={placeholderValues}
         focusBorderColor={colorPrimary}
         fontSize="0.9em"
       />
