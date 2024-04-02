@@ -1,15 +1,15 @@
-import Spinner from "components/Spinner/Spinner";
-import { getFridge } from "services/localStorage";
+import { useSelector } from "react-redux";
 import FridgeIngredientsList from "./FridgeIngredientsList/FridgeIngredientsList";
+import { getFridgeState } from "store/fridge/fridge";
 
 const FridgePage = () => {
-  const ingredients = getFridge();
-  // const { isLoading } = ingredients;
+  const fridgeIngredients = useSelector(getFridgeState);
 
   return (
     <>
-      {/* {isLoading && <Spinner />} */}
-      {ingredients && <FridgeIngredientsList ingredients={ingredients} />}
+      {fridgeIngredients && (
+        <FridgeIngredientsList ingredients={fridgeIngredients} />
+      )}
     </>
   );
 };

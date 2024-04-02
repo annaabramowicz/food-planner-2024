@@ -10,19 +10,28 @@ import {
 } from "app/style/theme/theme";
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
-import { getFridge, saveIngredientInFridge } from "services/localStorage";
+import {
+  getFridgeState,
+  removeIngredientFromFridgeAsync,
+  saveIngredientToFridgeAsync,
+} from "store/fridge/fridge";
+import { useDispatch, useSelector } from "react-redux";
 
 const Ingredient = ({ ingredient }) => {
+  const dispatch = useDispatch();
+  const { ingredients } = useSelector(getFridgeState);
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
-  const toggleClick = () => {
-    saveIngredientInFridge(ingredient);
-  };
+  const isIngredientSelected = ingredients.some(
+    (storeIngredient) => storeIngredient.id === ingredient.id
+  );
 
-  const selectedIngredients = getFridge();
-  const selectedIngredientsId = selectedIngredients.map((ingre) => ingre.id);
-  const id = selectedIngredientsId.includes(ingredient.id);
+  const toggleClick = () => {
+    isIngredientSelected
+      ? dispatch(removeIngredientFromFridgeAsync(ingredient.id))
+      : dispatch(saveIngredientToFridgeAsync(ingredient));
+  };
 
   return (
     <Flex
@@ -41,7 +50,7 @@ const Ingredient = ({ ingredient }) => {
         color: colorPrimary,
         cursor: "pointer",
       }}
-      {...(id && {
+      {...(isIngredientSelected && {
         boxShadow: `0px 0px 0px 2px ${colorPrimary}`,
         color: colorPrimary,
       })}
@@ -52,12 +61,12 @@ const Ingredient = ({ ingredient }) => {
         objectFit="contain"
         h="60px"
         htmlHeight="60px"
-        {...(id && {
+        {...(isIngredientSelected && {
           opacity: "0.5",
         })}
       />
       {ingredient.name}
-      {id && (
+      {isIngredientSelected && (
         <Circle
           pos="absolute"
           backgroundColor={colorPrimary}

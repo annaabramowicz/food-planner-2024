@@ -1,30 +1,23 @@
 import Image from "components/Image/Image";
 import Flex from "components/Flex/Flex";
-import {
-  colorFifth,
-  colorFourth,
-  colorPrimary,
-  colorPrimaryDark,
-  colorSixth,
-} from "app/style/theme/theme";
+import { colorFifth, colorFourth, colorSixth } from "app/style/theme/theme";
 import config from "config/env";
-import { getFridge, saveIngredientInFridge } from "services/localStorage";
-import Box from "components/Box/Box";
 import { Circle } from "@chakra-ui/react";
-import { IoCheckmark } from "react-icons/io5";
+import {  IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
+import {
+  removeIngredientFromFridgeAsync,
+} from "store/fridge/fridge";
+import { useDispatch } from "react-redux";
 
 const FridgeIngredient = ({ ingredient }) => {
+  const dispatch = useDispatch();
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
   const toggleClick = () => {
-    saveIngredientInFridge(ingredient);
+    dispatch(removeIngredientFromFridgeAsync(ingredient.id));
   };
-
-  const selectedIngredients = getFridge();
-  const selectedIngredientsId = selectedIngredients.map((ingre) => ingre.id);
-  const id = selectedIngredientsId.includes(ingredient.id);
 
   return (
     <Flex
@@ -63,7 +56,7 @@ const FridgeIngredient = ({ ingredient }) => {
           cursor: "pointer",
         }}
       >
-        <Icon as={IoCheckmark} height="20px" />
+        <Icon as={IoCloseOutline} height="20px" />
       </Circle>
     </Flex>
   );

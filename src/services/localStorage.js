@@ -1,14 +1,16 @@
 const FRIDGE = "fridge";
 
-export const saveIngredientInFridge = (ingredient) => {
-  let existingFridge = JSON.parse(localStorage.getItem(FRIDGE));
+export const getIngredientsFromLocalStorage = () =>
+  JSON.parse(localStorage.getItem(FRIDGE));
 
-  if (!existingFridge) {
-    existingFridge = [];
-  }
-  
+export const saveIngredientInLocalStorage = (ingredient) => {
+  let existingFridge = getIngredientsFromLocalStorage() || [];
   const newFridge = [...existingFridge, ingredient];
   localStorage.setItem(FRIDGE, JSON.stringify(newFridge));
 };
 
-export const getFridge = () => JSON.parse(localStorage.getItem(FRIDGE));
+export const removeIngredientFromLocalStorage = (id) => {
+  let existingFridge = getIngredientsFromLocalStorage();
+  const newFridge = existingFridge.filter((ingredient) => ingredient.id !== id);
+  localStorage.setItem(FRIDGE, JSON.stringify(newFridge));
+};

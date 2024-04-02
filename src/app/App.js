@@ -8,10 +8,11 @@ import Box from "components/Box/Box";
 import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
+import { getAllRecipes } from "store/recipes/recipes";
 
 function App() {
   const location = useLocation();
-  const recipes = useSelector((state) => state.recipes);
+  const recipes = useSelector(getAllRecipes);
   const { isLoading } = recipes;
 
   return (
