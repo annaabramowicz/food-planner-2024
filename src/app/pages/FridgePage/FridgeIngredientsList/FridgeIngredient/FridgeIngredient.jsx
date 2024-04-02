@@ -2,7 +2,7 @@ import Image from "components/Image/Image";
 import Flex from "components/Flex/Flex";
 import { colorFifth, colorFourth, colorSixth } from "app/style/theme/theme";
 import config from "config/env";
-import { Circle } from "@chakra-ui/react";
+import Circle from "components/Circle/Circle";
 import {  IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import {
