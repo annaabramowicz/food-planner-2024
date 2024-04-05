@@ -5,13 +5,8 @@ import { getRecipes } from "store/recipes/recipes";
 
 const RecipesPage = () => {
   const recipesState = useSelector(getRecipes);
-  const { initialRecipes, recipes, loadingRecipes, isLoading } = recipesState;
-
-  const rederedRecipes = isLoading
-    ? loadingRecipes
-    : recipes.length
-    ? recipes
-    : initialRecipes;
+  const { recipes, loadingRecipes, isLoading } = recipesState;
+  const rederedRecipes = isLoading ? loadingRecipes: recipes;    
 
   return (
     <>

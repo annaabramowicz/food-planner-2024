@@ -5,7 +5,6 @@ import {
 
 //initial state
 const initialState = {
-  initialRecipes: [],
   recipes: [],
   loadingRecipes: [],
   isLoading: false,
@@ -13,7 +12,6 @@ const initialState = {
 
 //ACTION TYPES
 const GET_RECIPES_STARTED = `GET_RECIPES_STARTED`;
-const GET_INITIAL_RECIPES_SUCCESS = `GET_INITIAL_RECIPES_SUCCESS`;
 const GET_RECIPES_SUCCESS = `GET_RECIPES_SUCCESS`;
 const GET_RECIPES_FAIL = `GET_RECIPES_FAIL`;
 
@@ -22,12 +20,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPES_STARTED:
       return { ...state, isLoading: true };
-    case GET_INITIAL_RECIPES_SUCCESS:
-      return {
-        ...state,
-        initialRecipes: action.payload,
-        isLoading: false,
-      };
     case GET_RECIPES_SUCCESS:
       return {
         ...state,
@@ -45,10 +37,6 @@ const reducer = (state = initialState, action) => {
 
 //ACTION CREATORS
 const getRecipesStarted = () => ({ type: GET_RECIPES_STARTED });
-const getInitialRecipesSuccess = (result) => ({
-  type: GET_INITIAL_RECIPES_SUCCESS,
-  payload: result,
-});
 const getRecipesSuccess = (result) => ({
   type: GET_RECIPES_SUCCESS,
   payload: result,
@@ -66,7 +54,7 @@ export const getInitialRecipesAsync = () => async (dispatch, getState) => {
   dispatch(getRecipesStarted());
   try {
     const result = await getInitialRecipesFromApi();
-    dispatch(getInitialRecipesSuccess(result));
+    dispatch(getRecipesSuccess(result));
   } catch (err) {
     dispatch(getRecipesFail(err));
   }
