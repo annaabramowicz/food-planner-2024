@@ -1,14 +1,11 @@
 import Flex from "components/Flex/Flex";
 import Recipe from "./Recipe/Recipe";
-import { useSelector } from "react-redux";
-import { getRecipes } from "store/recipes/recipes";
 
-const RecipesList = () => {
-  const recipes = useSelector(getRecipes);
-
+const RecipesList = ({rederedRecipes}) => {
+  
   return (
     <Flex mt={2} flexWrap="wrap" justifyContent="space-around">
-      {recipes.recipes.map((recipe) => {
+      {rederedRecipes?.map((recipe) => {
         return <Recipe key={recipe.id} recipe={recipe} />;
       })}
     </Flex>

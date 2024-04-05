@@ -1,7 +1,6 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { IoSearch } from "react-icons/io5";
@@ -12,20 +11,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { debounce } from "lodash-es";
 import { getRecipesWithParamAsync } from "store/recipes/recipes";
 
-const debounceSearchIngredientsAsync = debounce(
-  (dispatch, searchValue, navigate, setInputValue) => {
-    dispatch(getIngredientsWithParamAsync(searchValue));
-    setInputValue("");
-    navigate("/ingredients");
-  },
-  2000,
-  { leading: false }
-);
-const debounceSearchRecipesAsync = debounce(
-  (dispatch, searchValue, navigate, setInputValue) => {
-    dispatch(getRecipesWithParamAsync(searchValue));
-    setInputValue("");
-    navigate("/recipes");
+const debounceSearchAsync = debounce(
+  (dispatch, searchValue, searchBarAction, postAction) => {
+    if (searchValue !== "") {
+      dispatch(searchBarAction(searchValue, postAction));
+    }
   },
   2000,
   { leading: false }
@@ -35,9 +25,8 @@ const SearchBar = (props) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState("");
   const isCurrentRouteIgredients = pathname === "/ingredients";
-  console.log(isCurrentRouteIgredients);
+  const isCurrentRouteRecipes = pathname === "/recipes";
 
   const searchByPlaceholder = `Search by ${
     isCurrentRouteIgredients ? `ingredients` : `recipes`
@@ -49,27 +38,17 @@ const SearchBar = (props) => {
     md: searchByPlaceholder,
   });
 
+  const searchBarAction = isCurrentRouteIgredients
+    ? getIngredientsWithParamAsync
+    : getRecipesWithParamAsync;
+
   const handleChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
+    const postAction =
+      !isCurrentRouteIgredients && !isCurrentRouteRecipes
+        ? () => navigate("/recipes")
+        : undefined;
+    debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
   };
-
-  useEffect(() => {
-    isCurrentRouteIgredients &&
-      inputValue &&
-      debounceSearchIngredientsAsync(
-        dispatch,
-        inputValue,
-        navigate,
-        setInputValue
-      );
-  }, [dispatch, inputValue, navigate, isCurrentRouteIgredients]);
-
-  useEffect(() => {
-    !isCurrentRouteIgredients &&
-      inputValue &&
-      debounceSearchRecipesAsync(dispatch, inputValue, navigate, setInputValue);
-  }, [dispatch, inputValue, navigate, isCurrentRouteIgredients]);
 
   return (
     <InputGroup
@@ -84,7 +63,6 @@ const SearchBar = (props) => {
       </InputLeftElement>
       <Input
         onChange={handleChange}
-        value={inputValue}
         paddingLeft={10}
         placeholder={placeholderValues}
         focusBorderColor={colorPrimary}

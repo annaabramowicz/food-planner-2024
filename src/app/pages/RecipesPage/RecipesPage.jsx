@@ -1,22 +1,21 @@
 import RecipesList from "app/RecipesList/RecipesList";
 import Spinner from "components/Spinner/Spinner";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getRecipesAsync } from "store/recipes/recipes";
+import { useSelector } from "react-redux";
+import { getRecipes } from "store/recipes/recipes";
 
 const RecipesPage = () => {
-  const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes);
-  const { isLoading } = recipes;
-  const isRecipesEmpty = !Boolean(recipes.recipes.length) ;
+  const recipesState = useSelector(getRecipes);
+  const { initialRecipes, recipes, loadingRecipes, isLoading } = recipesState;
 
-  useEffect(() => {
-    isRecipesEmpty && dispatch(getRecipesAsync());
-  }, [dispatch, isRecipesEmpty]);
+  const rederedRecipes = isLoading
+    ? loadingRecipes
+    : recipes.length
+    ? recipes
+    : initialRecipes;
 
   return (
     <>
-      <RecipesList />
+      <RecipesList rederedRecipes={rederedRecipes} />
       {isLoading && <Spinner />}
     </>
   );

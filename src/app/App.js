@@ -1,17 +1,21 @@
 import "reset.css";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
-import Spinner from "components/Spinner/Spinner";
 import Navigation from "./Navigation/Navigation";
 import Box from "components/Box/Box";
 import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
-import { getRecipesAsync } from "store/recipes/recipes";
+import { useDispatch } from "react-redux";
+import { getInitialRecipesAsync } from "store/recipes/recipes";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getInitialRecipesAsync());
+  }, [dispatch]);
 
   return (
     <Box
