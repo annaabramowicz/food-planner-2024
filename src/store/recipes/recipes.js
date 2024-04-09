@@ -1,13 +1,19 @@
-import { getRecipesFromApi } from "services/foodApi";
+import {
+  getInitialRecipesFromApi,
+  getRecipesWithParamFromApi,
+} from "services/foodApi";
 
 //initial state
-const initialState = { recipes: [], isLoading: false };
+const initialState = {
+  recipes: [],
+  loadingRecipes: [],
+  isLoading: false,
+};
 
 //ACTION TYPES
-const NAMESPACE = "GET_RECIPES_";
-const GET_RECIPES_STARTED = `${NAMESPACE}GET_RECIPES_STARTED`;
-const GET_RECIPES_SUCCESS = `${NAMESPACE}GET_RECIPES_SUCCESS`;
-const GET_RECIPES_FAIL = `${NAMESPACE}GET_RECIPES_FAIL`;
+const GET_RECIPES_STARTED = `GET_RECIPES_STARTED`;
+const GET_RECIPES_SUCCESS = `GET_RECIPES_SUCCESS`;
+const GET_RECIPES_FAIL = `GET_RECIPES_FAIL`;
 
 //REDUCER
 const reducer = (state = initialState, action) => {
@@ -16,9 +22,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case GET_RECIPES_SUCCESS:
       return {
-        recipes: [...state.recipes, ...action.payload],
+        ...state,
+        recipes: action.payload?.length
+          ? [...action.payload]
+          : [...state.recipes],
         isLoading: false,
       };
+    case GET_RECIPES_FAIL:
+      return { ...state, isLoading: false };
     default:
       return state;
   }
@@ -33,7 +44,7 @@ const getRecipesSuccess = (result) => ({
 const getRecipesFail = (error) => ({ type: GET_RECIPES_FAIL, error });
 
 // THUNKS
-export const getRecipesAsync = () => async (dispatch, getState) => {
+export const getInitialRecipesAsync = () => async (dispatch, getState) => {
   const { isLoading } = getState().recipes;
 
   if (isLoading) {
@@ -41,16 +52,34 @@ export const getRecipesAsync = () => async (dispatch, getState) => {
   }
 
   dispatch(getRecipesStarted());
-
   try {
-    const result = await getRecipesFromApi();
+    const result = await getInitialRecipesFromApi();
     dispatch(getRecipesSuccess(result));
   } catch (err) {
     dispatch(getRecipesFail(err));
   }
 };
 
+// THUNKS
+export const getRecipesWithParamAsync =
+  (searchParam, postAction) => async (dispatch, getState) => {
+    const { isLoading } = getState().recipes;
+
+    if (isLoading) {
+      return;
+    }
+
+    dispatch(getRecipesStarted());
+    if (postAction) postAction();
+    try {
+      const result = await getRecipesWithParamFromApi(searchParam);
+      dispatch(getRecipesSuccess(result));
+    } catch (err) {
+      dispatch(getRecipesFail(err));
+    }
+  };
+
 //SELECTORS
-export const getAllRecipes = (state) => state.recipes;
+export const getRecipes = (state) => state.recipes;
 
 export default reducer;

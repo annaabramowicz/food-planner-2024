@@ -14,7 +14,6 @@ const MobileNavigation = () => {
     <Flex
       bg="white"
       borderTop={`1px solid ${colorFourth}`}
-
       justifyContent="space-around"
       w="100%"
       h="100px"
@@ -22,7 +21,7 @@ const MobileNavigation = () => {
       bottom={0}
       left={0}
       right={0}
-      zIndex={1}
+      zIndex={3}
     >
       {routes.map((route) => (
         <NavLink

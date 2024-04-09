@@ -5,7 +5,7 @@ import config from "config/env";
 
 const Ingredient = ({ ingredient }) => {
   const imageSize = `100x100`;
-  const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
+  const imageUrl = `${config.apiImageUrl}cdn/ingredients_${imageSize}/`;
   return (
     <Flex
       flexDirection="column"
