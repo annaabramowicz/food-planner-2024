@@ -15,9 +15,10 @@ const REMOVE_INGREDIENT_FROM_FRIDGE = `REMOVE_INGREDIENT_FROM_FRIDGE`;
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_INGREDIENT_TO_FRIDGE:
-      return { ingredients: [...state.ingredients, action.payload] };
+      return { ...state, ingredients: [...state.ingredients, action.payload] };
     case REMOVE_INGREDIENT_FROM_FRIDGE:
       return {
+        ...state,
         ingredients: state.ingredients.filter(
           (ingredient) => ingredient.id !== action.payload
         ),

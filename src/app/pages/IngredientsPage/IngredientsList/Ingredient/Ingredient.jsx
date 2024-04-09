@@ -17,6 +17,17 @@ import {
 } from "store/fridge/fridge";
 import { useDispatch, useSelector } from "react-redux";
 
+const hoverUIstylePointer = {
+  boxShadow: `0px 0px 0px 2px ${colorPrimaryDark}`,
+  color: colorPrimary,
+  cursor: "pointer",
+};
+
+const hoverUIstyle = {
+  boxShadow: `0px 0px 0px 2px ${colorPrimary}`,
+  color: colorPrimary,
+};
+ 
 const Ingredient = ({ ingredient }) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getFridgeState);
@@ -45,15 +56,8 @@ const Ingredient = ({ ingredient }) => {
       border={`1px solid ${colorFourth}`}
       borderRadius="md"
       fontSize="0.9em"
-      _hover={{
-        boxShadow: `0px 0px 0px 2px ${colorPrimaryDark}`,
-        color: colorPrimary,
-        cursor: "pointer",
-      }}
-      {...(isIngredientSelected && {
-        boxShadow: `0px 0px 0px 2px ${colorPrimary}`,
-        color: colorPrimary,
-      })}
+      _hover={hoverUIstylePointer}
+      {...(isIngredientSelected && hoverUIstyle)}
     >
       <Image
         src={`${imageUrl}${ingredient.image}`}

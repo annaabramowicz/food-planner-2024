@@ -3,12 +3,15 @@ import Flex from "components/Flex/Flex";
 import { colorFifth, colorFourth, colorSixth } from "app/style/theme/theme";
 import config from "config/env";
 import Circle from "components/Circle/Circle";
-import {  IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
-import {
-  removeIngredientFromFridgeAsync,
-} from "store/fridge/fridge";
+import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
 import { useDispatch } from "react-redux";
+
+const hoverUIstyle = {
+  boxShadow: `0px 0px 0px 1px ${colorSixth}`,
+  cursor: "pointer",
+};
 
 const FridgeIngredient = ({ ingredient }) => {
   const dispatch = useDispatch();
@@ -51,10 +54,7 @@ const FridgeIngredient = ({ ingredient }) => {
         height="25px"
         width="25px"
         color={colorSixth}
-        _hover={{
-          boxShadow: `0px 0px 0px 1px ${colorSixth}`,
-          cursor: "pointer",
-        }}
+        _hover={hoverUIstyle}
       >
         <Icon as={IoCloseOutline} height="20px" />
       </Circle>
