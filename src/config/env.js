@@ -1,6 +1,6 @@
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
-  apiImageUrl: `https://spoonacular.com/`,
+  apiCdnUrl: `https://spoonacular.com/cdn/`,
   apiUrl: `https://api.spoonacular.com/`,
 };
 

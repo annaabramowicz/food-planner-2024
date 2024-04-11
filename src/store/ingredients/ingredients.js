@@ -1,5 +1,5 @@
 import { getIngredientsWithParamFromApi } from "services/foodApi";
-import initialIngredients from "app/IngredientsList/initialIngredients";
+import initialIngredients from "./initialIngredients";
 
 //initial state
 const initialState = { ingredients: initialIngredients, isLoading: false };
@@ -17,6 +17,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case GET_INGREDIENTS_SUCCESS:
       return {
+        ...state,
         ingredients: action.payload?.length ? [...action.payload] : [],
         isLoading: false,
       };
