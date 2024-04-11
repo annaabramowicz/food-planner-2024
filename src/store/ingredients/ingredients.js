@@ -1,5 +1,5 @@
-import { getIngredientsFromApi } from "services/foodApi";
-import initialIngredients from "store/ingredients/initialIngredients";
+import { getIngredientsWithParamFromApi } from "services/foodApi";
+import initialIngredients from "./initialIngredients";
 
 //initial state
 const initialState = { ingredients: initialIngredients, isLoading: false };
@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-//ACTION CREATORS
+//ACTION CREATORS 
 const getIngredientsStarted = () => ({ type: GET_INGREDIENTS_STARTED });
 const getIngredientsSuccess = (result) => ({
   type: GET_INGREDIENTS_SUCCESS,
@@ -37,14 +37,14 @@ const getIngredientsSuccess = (result) => ({
 const getIngredientsFail = (error) => ({ type: GET_INGREDIENTS_FAIL, error });
 
 // THUNKS
-export const getIngredientsAsync =
+export const getIngredientsWithParamAsync =
   (searchParam) => async (dispatch, getState) => {
     const { isLoading } = getState().ingredients;
     if (!isLoading) {
       dispatch(getIngredientsStarted());
 
       try {
-        const result = await getIngredientsFromApi(searchParam);
+        const result = await getIngredientsWithParamFromApi(searchParam);
         dispatch(getIngredientsSuccess(result));
       } catch (err) {
         dispatch(getIngredientsFail(err));

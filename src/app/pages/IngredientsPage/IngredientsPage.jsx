@@ -6,11 +6,11 @@ import { getIngredients } from "store/ingredients/ingredients";
 const IngredientsPage = () => {
   const ingredients = useSelector(getIngredients);
   const { isLoading } = ingredients;
-  
+
   return (
     <>
-      {isLoading && <Spinner />}
       <IngredientsList ingredients={ingredients.ingredients} />
+      {isLoading && <Spinner />}
     </>
   );
 };
