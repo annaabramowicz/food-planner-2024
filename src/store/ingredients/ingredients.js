@@ -1,58 +1,43 @@
-import { getIngredientsWithParamFromApi } from "services/foodApi";
+// import { getIngredientsWithParamFromApi } from "services/foodApi";
 import initialIngredients from "./initialIngredients";
+import { createSlice } from "@reduxjs/toolkit";
 
 //initial state
-const initialState = { ingredients: initialIngredients, isLoading: false };
+const initialState = { ingredients: [], isLoading: false };
 
-//ACTION TYPES
-const NAMESPACE = "GET_INGREDIENTS_";
-const GET_INGREDIENTS_STARTED = `${NAMESPACE}STARTED`;
-const GET_INGREDIENTS_SUCCESS = `${NAMESPACE}SUCCESS`;
-const GET_INGREDIENTS_FAIL = `${NAMESPACE}FAIL`;
+const slice = createSlice({
+  name: "ingredients",
+  initialState: initialState,
+  reducers: {
+    getIngredientsStarted: (state) => {
+      state.ingredients = initialIngredients;
+      state.isLoading= true;
+    },
+    getIngredientsSuccess: (state, { payload }) => {
+      state.ingredients.push(payload);
+      state.isLoading= false;
 
-//REDUCER
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_INGREDIENTS_STARTED:
-      return { ...state, isLoading: true };
-    case GET_INGREDIENTS_SUCCESS:
-      return {
-        ...state,
-        ingredients: action.payload?.length ? [...action.payload] : [],
-        isLoading: false,
-      };
-    case GET_INGREDIENTS_FAIL:
-      return { ...state, isLoading: false };
-    default:
-      return state;
-  }
-};
-
-//ACTION CREATORS 
-const getIngredientsStarted = () => ({ type: GET_INGREDIENTS_STARTED });
-const getIngredientsSuccess = (result) => ({
-  type: GET_INGREDIENTS_SUCCESS,
-  payload: result,
+    },
+    // getIngredientsFail: (state, action) =>
+    // { ...state, isLoading: false },
+  },
 });
-const getIngredientsFail = (error) => ({ type: GET_INGREDIENTS_FAIL, error });
 
-// THUNKS
-export const getIngredientsWithParamAsync =
-  (searchParam) => async (dispatch, getState) => {
-    const { isLoading } = getState().ingredients;
-    if (!isLoading) {
-      dispatch(getIngredientsStarted());
+// // THUNKS
+// export const getIngredientsWithParamAsync =
+//   (searchParam) => async (dispatch, getState) => {
+//     const { isLoading } = getState().ingredients;
+//     if (!isLoading) {
+//       dispatch(getIngredientsStarted());
 
-      try {
-        const result = await getIngredientsWithParamFromApi(searchParam);
-        dispatch(getIngredientsSuccess(result));
-      } catch (err) {
-        dispatch(getIngredientsFail(err));
-      }
-    }
-  };
+//       try {
+//         const result = await getIngredientsWithParamFromApi(searchParam);
+//         dispatch(getIngredientsSuccess(result));
+//       } catch (err) {
+//         dispatch(getIngredientsFail(err));
+//       }
+//     }
+//   };
+export const { getIngredientsStarted, getIngredientsSuccess } = slice.actions;
 
-//SELECTORS
-export const getIngredients = (state) => state.ingredients;
-
-export default reducer;
+export default slice.reducer;

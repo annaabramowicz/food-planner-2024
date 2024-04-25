@@ -2,7 +2,7 @@ import { useBreakpointValue } from "@chakra-ui/media-query";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
 import { useDispatch } from "react-redux";
-import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
+// import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { IoSearch } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
@@ -38,17 +38,17 @@ const SearchBar = (props) => {
     md: searchByPlaceholder,
   });
 
-  const searchBarAction = isCurrentRouteIgredients
-    ? getIngredientsWithParamAsync
-    : getRecipesWithParamAsync;
+  // const searchBarAction = isCurrentRouteIgredients
+  //   ? getIngredientsWithParamAsync
+  //   : getRecipesWithParamAsync;
 
-  const handleChange = (e) => {
-    const postAction =
-      !isCurrentRouteIgredients && !isCurrentRouteRecipes
-        ? () => navigate("/recipes")
-        : undefined;
-    debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
-  };
+  // const handleChange = (e) => {
+  //   const postAction =
+  //     !isCurrentRouteIgredients && !isCurrentRouteRecipes
+  //       ? () => navigate("/recipes")
+  //       : undefined;
+  //   debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
+  // };
 
   return (
     <InputGroup
@@ -62,7 +62,7 @@ const SearchBar = (props) => {
         <Icon w={4} as={IoSearch} color={colorThird} />
       </InputLeftElement>
       <Input
-        onChange={handleChange}
+        // onChange={handleChange}
         paddingLeft={10}
         placeholder={placeholderValues}
         focusBorderColor={colorPrimary}
