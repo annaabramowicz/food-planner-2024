@@ -1,15 +1,15 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
+import { getRecipesWithParamAsync } from "store/recipes/recipes";
+import { debounce } from "lodash-es";
+import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import Input from "components/Input/Input";
-import { useDispatch } from "react-redux";
-// import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
-import { IoSearch } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
-import { useLocation, useNavigate } from "react-router-dom";
-import { debounce } from "lodash-es";
-import { getRecipesWithParamAsync } from "store/recipes/recipes";
 
 const debounceSearchAsync = debounce(
   (dispatch, searchValue, searchBarAction, postAction) => {
@@ -38,17 +38,17 @@ const SearchBar = (props) => {
     md: searchByPlaceholder,
   });
 
-  // const searchBarAction = isCurrentRouteIgredients
-  //   ? getIngredientsWithParamAsync
-  //   : getRecipesWithParamAsync;
+  const searchBarAction = isCurrentRouteIgredients
+    ? getIngredientsWithParamAsync
+    : getRecipesWithParamAsync;
 
-  // const handleChange = (e) => {
-  //   const postAction =
-  //     !isCurrentRouteIgredients && !isCurrentRouteRecipes
-  //       ? () => navigate("/recipes")
-  //       : undefined;
-  //   debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
-  // };
+  const handleChange = (e) => {
+    const postAction =
+      !isCurrentRouteIgredients && !isCurrentRouteRecipes
+        ? () => navigate("/recipes")
+        : undefined;
+    debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
+  };
 
   return (
     <InputGroup
@@ -62,7 +62,7 @@ const SearchBar = (props) => {
         <Icon w={4} as={IoSearch} color={colorThird} />
       </InputLeftElement>
       <Input
-        // onChange={handleChange}
+        onChange={handleChange}
         paddingLeft={10}
         placeholder={placeholderValues}
         focusBorderColor={colorPrimary}

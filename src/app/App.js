@@ -8,18 +8,14 @@ import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch } from "react-redux";
 import { getInitialRecipesAsync } from "store/recipes/recipes";
-import store from "store/store";
-import { getIngredientsStarted, getIngredientsSuccess } from "store/ingredients/ingredients";
 
 function App() {
   const location = useLocation();
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(getInitialRecipesAsync());
   // }, [dispatch]);
 
-  store.dispatch(getIngredientsStarted())
 
   return (
     <Box
