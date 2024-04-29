@@ -11,7 +11,7 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 const reducer = combineReducers({
   recipes: recipesReducer,
   ingredients: ingredientsReducer,
-  // fridge: fridgeReducer,
+  fridge: fridgeReducer,
 });
 
 const store = configureStore({ reducer, composedEnhancer });

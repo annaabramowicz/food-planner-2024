@@ -11,7 +11,6 @@ import {
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
 import {
-  getFridgeState,
   removeIngredientFromFridgeAsync,
   saveIngredientToFridgeAsync,
 } from "store/fridge/fridge";
@@ -27,26 +26,26 @@ const hoverUIstyle = {
   boxShadow: `0px 0px 0px 2px ${colorPrimary}`,
   color: colorPrimary,
 };
- 
+
 const Ingredient = ({ ingredient }) => {
   const dispatch = useDispatch();
-  // const { ingredients } = useSelector(getFridgeState);
+  const { ingredients } = useSelector((state) => state.fridge);
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
-  // const isIngredientSelected = ingredients.some(
-  //   (storeIngredient) => storeIngredient.id === ingredient.id
-  // );
+  const isIngredientSelected = ingredients.some(
+    (storeIngredient) => storeIngredient.id === ingredient.id
+  );
 
-  // const toggleClick = () => {
-  //   isIngredientSelected
-  //     ? dispatch(removeIngredientFromFridgeAsync(ingredient.id))
-  //     : dispatch(saveIngredientToFridgeAsync(ingredient));
-  // };
+  const toggleClick = () => {
+    isIngredientSelected
+      ? dispatch(removeIngredientFromFridgeAsync(ingredient.id))
+      : dispatch(saveIngredientToFridgeAsync(ingredient));
+  };
 
   return (
     <Flex
-      // onClick={toggleClick}
+      onClick={toggleClick}
       flexDirection="column"
       pos="relative"
       minWidth={120}
@@ -57,7 +56,7 @@ const Ingredient = ({ ingredient }) => {
       borderRadius="md"
       fontSize="0.9em"
       _hover={hoverUIstylePointer}
-      // {...(isIngredientSelected && hoverUIstyle)}
+      {...(isIngredientSelected && hoverUIstyle)}
     >
       <Image
         src={`${imageUrl}${ingredient.image}`}
@@ -65,12 +64,12 @@ const Ingredient = ({ ingredient }) => {
         objectFit="contain"
         h="60px"
         htmlHeight="60px"
-        // {...(isIngredientSelected && {
-        //   opacity: "0.5",
-        // })}
+        {...(isIngredientSelected && {
+          opacity: "0.5",
+        })}
       />
       {ingredient.name}
-      {/* {isIngredientSelected && (
+      {isIngredientSelected && (
         <Circle
           pos="absolute"
           backgroundColor={colorPrimary}
@@ -78,7 +77,7 @@ const Ingredient = ({ ingredient }) => {
         >
           <Icon as={IoCheckmark} height="15px" />
         </Circle>
-      )} */}
+      )}
     </Flex>
   );
 };
