@@ -13,8 +13,9 @@ import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement
 
 const debounceSearchAsync = debounce(
   (dispatch, searchValue, searchBarAction, postAction) => {
+    if (postAction && searchValue) postAction();
     if (searchValue !== "") {
-      dispatch(searchBarAction(searchValue, postAction));
+      dispatch(searchBarAction(searchValue));
     }
   },
   2000,

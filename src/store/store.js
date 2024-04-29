@@ -1,5 +1,5 @@
 import recipesReducer from "./recipes/recipes";
-import ingredientsReducer, { getIngredientsStarted } from "./ingredients/ingredients";
+import ingredientsReducer from "./ingredients/ingredients";
 import fridgeReducer from "./fridge/fridge";
 import { thunk } from "redux-thunk";
 import { applyMiddleware, combineReducers } from "redux";
@@ -9,7 +9,7 @@ import { configureStore } from "@reduxjs/toolkit";
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 
 const reducer = combineReducers({
-//   recipes: recipesReducer,
+  recipes: recipesReducer,
   ingredients: ingredientsReducer,
   // fridge: fridgeReducer,
 });

@@ -11,7 +11,6 @@ export const getIngredientsWithParamAsync = createAsyncThunk(
   async (searchParam, thunkAPI) => {
     try {
       const result = await getIngredientsWithParamFromApi(searchParam);
-      console.log(result)
       return result;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

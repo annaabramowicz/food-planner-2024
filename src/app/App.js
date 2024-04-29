@@ -11,11 +11,11 @@ import { getInitialRecipesAsync } from "store/recipes/recipes";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getInitialRecipesAsync());
-  // }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(getInitialRecipesAsync());
+  }, [dispatch]);
 
   return (
     <Box
