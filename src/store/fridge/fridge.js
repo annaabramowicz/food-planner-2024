@@ -1,3 +1,4 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getIngredientsFromLocalStorage,
   saveIngredientInLocalStorage,
@@ -7,48 +8,38 @@ import {
 //initial state
 const initialState = { ingredients: getIngredientsFromLocalStorage() || [] };
 
-//ACTION TYPES
-const SAVE_INGREDIENT_TO_FRIDGE = `SAVE_INGREDIENT_TO_FRIDGE`;
-const REMOVE_INGREDIENT_FROM_FRIDGE = `REMOVE_INGREDIENT_FROM_FRIDGE`;
-
-//REDUCER
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SAVE_INGREDIENT_TO_FRIDGE:
-      return { ...state, ingredients: [...state.ingredients, action.payload] };
-    case REMOVE_INGREDIENT_FROM_FRIDGE:
-      return {
-        ...state,
-        ingredients: state.ingredients.filter(
-          (ingredient) => ingredient.id !== action.payload
-        ),
-      };
-    default:
-      return state;
+export const saveIngredientToFridgeAsync = createAsyncThunk(
+  "saveIngredientToFridge",
+  (ingredient, thunkAPI) => {
+    saveIngredientInLocalStorage(ingredient);
+    thunkAPI.dispatch(saveIngredientToFridge(ingredient));
   }
-};
+);
 
-//ACTION CREATORS
-const saveIngredientToFridge = (ingredient) => ({
-  type: SAVE_INGREDIENT_TO_FRIDGE,
-  payload: ingredient,
+export const removeIngredientFromFridgeAsync = createAsyncThunk(
+  "removeIngredientFromFridge",
+  (id, thunkAPI) => {
+    removeIngredientFromLocalStorage(id);
+    thunkAPI.dispatch(removeIngredientFromFridge(id));
+  }
+);
+
+const slice = createSlice({
+  name: "fridge",
+  initialState: initialState,
+  reducers: {
+    saveIngredientToFridge: (state, { payload }) => {
+      state.ingredients.push(payload);
+    },
+    removeIngredientFromFridge: (state, { payload }) => {
+      state.ingredients = state.ingredients.filter(
+        (ingredient) => ingredient.id !== payload
+      );
+    },
+  },
 });
-const removeIngredientFromFridge = (id) => ({
-  type: REMOVE_INGREDIENT_FROM_FRIDGE,
-  payload: id,
-});
 
-// THUNKS
-export const saveIngredientToFridgeAsync = (ingredient) => (dispatch) => {
-  saveIngredientInLocalStorage(ingredient);
-  dispatch(saveIngredientToFridge(ingredient));
-};
-export const removeIngredientFromFridgeAsync = (id) => (dispatch) => {
-  removeIngredientFromLocalStorage(id);
-  dispatch(removeIngredientFromFridge(id));
-};
+export const { saveIngredientToFridge, removeIngredientFromFridge } =
+  slice.actions;
 
-//SELECTORS
-export const getFridgeState = (state) => state.fridge;
-
-export default reducer;
+export default slice.reducer;

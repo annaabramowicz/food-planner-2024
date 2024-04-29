@@ -1,3 +1,4 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getInitialRecipesFromApi,
   getRecipesWithParamFromApi,
@@ -10,76 +11,60 @@ const initialState = {
   isLoading: false,
 };
 
-//ACTION TYPES
-const GET_RECIPES_STARTED = `GET_RECIPES_STARTED`;
-const GET_RECIPES_SUCCESS = `GET_RECIPES_SUCCESS`;
-const GET_RECIPES_FAIL = `GET_RECIPES_FAIL`;
-
-//REDUCER
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_RECIPES_STARTED:
-      return { ...state, isLoading: true };
-    case GET_RECIPES_SUCCESS:
-      return {
-        ...state,
-        recipes: action.payload?.length
-          ? [...action.payload]
-          : [...state.recipes],
-        isLoading: false,
-      };
-    case GET_RECIPES_FAIL:
-      return { ...state, isLoading: false };
-    default:
-      return state;
-  }
-};
-
-//ACTION CREATORS
-const getRecipesStarted = () => ({ type: GET_RECIPES_STARTED });
-const getRecipesSuccess = (result) => ({
-  type: GET_RECIPES_SUCCESS,
-  payload: result,
-});
-const getRecipesFail = (error) => ({ type: GET_RECIPES_FAIL, error });
-
 // THUNKS
-export const getInitialRecipesAsync = () => async (dispatch, getState) => {
-  const { isLoading } = getState().recipes;
-
-  if (isLoading) {
-    return;
-  }
-
-  dispatch(getRecipesStarted());
-  try {
-    const result = await getInitialRecipesFromApi();
-    dispatch(getRecipesSuccess(result));
-  } catch (err) {
-    dispatch(getRecipesFail(err));
-  }
-};
-
-// THUNKS
-export const getRecipesWithParamAsync =
-  (searchParam, postAction) => async (dispatch, getState) => {
-    const { isLoading } = getState().recipes;
-
-    if (isLoading) {
-      return;
+export const getInitialRecipesAsync = createAsyncThunk(
+  "getInitialRecipes",
+  async (searchParam, thunkAPI) => {
+    try {
+      const result = await getInitialRecipesFromApi(searchParam);
+      return result;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
     }
+  }
+);
 
-    dispatch(getRecipesStarted());
-    if (postAction) postAction();
+export const getRecipesWithParamAsync = createAsyncThunk(
+  "getRecipesWithParam",
+  async (searchParam, thunkAPI) => {
     try {
       const result = await getRecipesWithParamFromApi(searchParam);
-      dispatch(getRecipesSuccess(result));
+      return result;
     } catch (err) {
-      dispatch(getRecipesFail(err));
+      return thunkAPI.rejectWithValue(err.message);
     }
-  };
+  }
+);
 
-//SELECTORS
-export const getRecipes = (state) => state.recipes;
+const slice = createSlice({
+  name: "ingredients",
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getInitialRecipesAsync.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getInitialRecipesAsync.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.recipes = payload;
+      })
+      .addCase(getInitialRecipesAsync.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.error = error.message;
+      })
+      .addCase(getRecipesWithParamAsync.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getRecipesWithParamAsync.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.recipes = payload?.length ? [...payload] : [...state.recipes];
+      })
+      .addCase(getRecipesWithParamAsync.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.error = error.message;
+      });
+  },
+});
 
-export default reducer;
+export default slice.reducer;

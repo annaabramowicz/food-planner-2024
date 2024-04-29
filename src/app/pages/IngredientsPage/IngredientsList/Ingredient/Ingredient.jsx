@@ -11,7 +11,6 @@ import {
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
 import {
-  getFridgeState,
   removeIngredientFromFridgeAsync,
   saveIngredientToFridgeAsync,
 } from "store/fridge/fridge";
@@ -27,10 +26,10 @@ const hoverUIstyle = {
   boxShadow: `0px 0px 0px 2px ${colorPrimary}`,
   color: colorPrimary,
 };
- 
+
 const Ingredient = ({ ingredient }) => {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector(getFridgeState);
+  const { ingredients } = useSelector((state) => state.fridge);
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
