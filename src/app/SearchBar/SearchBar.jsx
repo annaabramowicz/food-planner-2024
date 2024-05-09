@@ -1,20 +1,21 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
-import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
-import Input from "components/Input/Input";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
+import { getRecipesWithParamAsync } from "store/recipes/recipes";
+import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
+import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
+import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
-import { useLocation, useNavigate } from "react-router-dom";
-import { debounce } from "lodash-es";
-import { getRecipesWithParamAsync } from "store/recipes/recipes";
 
 const debounceSearchAsync = debounce(
   (dispatch, searchValue, searchBarAction, postAction) => {
+    if (postAction && searchValue) postAction();
     if (searchValue !== "") {
-      dispatch(searchBarAction(searchValue, postAction));
+      dispatch(searchBarAction(searchValue));
     }
   },
   2000,
