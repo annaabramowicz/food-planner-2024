@@ -1,4 +1,4 @@
-import RecipesList from "app/RecipesList/RecipesList";
+import RecipesList from "./RecipesList/RecipesList";
 import Spinner from "components/Spinner/Spinner";
 import { useSelector } from "react-redux";
 

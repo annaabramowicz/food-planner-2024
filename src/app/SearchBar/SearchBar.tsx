@@ -6,10 +6,13 @@ import { getRecipesWithParamAsync } from "store/recipes/recipes";
 import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
+import { ChangeEvent } from "react";
 import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
 import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
+
+type SearchBar = React.CSSProperties;
 
 const debounceSearchAsync = debounce(
   (dispatch, searchValue, searchBarAction, postAction) => {
@@ -22,15 +25,15 @@ const debounceSearchAsync = debounce(
   { leading: false }
 );
 
-const SearchBar = (props) => {
+const SearchBar = (props: SearchBar) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const isCurrentRouteIgredients = pathname === "/ingredients";
+  const isCurrentRouteIngredients = pathname === "/ingredients";
   const isCurrentRouteRecipes = pathname === "/recipes";
 
   const searchByPlaceholder = `Search by ${
-    isCurrentRouteIgredients ? `ingredients` : `recipes`
+    isCurrentRouteIngredients ? `ingredients` : `recipes`
   }`;
 
   const placeholderValues = useBreakpointValue({
@@ -39,13 +42,13 @@ const SearchBar = (props) => {
     md: searchByPlaceholder,
   });
 
-  const searchBarAction = isCurrentRouteIgredients
+  const searchBarAction = isCurrentRouteIngredients
     ? getIngredientsWithParamAsync
     : getRecipesWithParamAsync;
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const postAction =
-      !isCurrentRouteIgredients && !isCurrentRouteRecipes
+      !isCurrentRouteIngredients && !isCurrentRouteRecipes
         ? () => navigate("/recipes")
         : undefined;
     debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
