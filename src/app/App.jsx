@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 import { getInitialRecipesAsync } from "store/recipes/recipes";
 
 function App() {
-  const location = useLocation();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(getInitialRecipesAsync());
