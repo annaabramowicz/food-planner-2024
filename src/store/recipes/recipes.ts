@@ -1,11 +1,18 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getInitialRecipesFromApi,
   getRecipesWithParamFromApi,
 } from "services/foodApi";
+import { Recipes } from "lib/types";
+
+type InitialState = {
+  recipes: Recipes[];
+  loadingRecipes: null[];
+  isLoading: boolean;
+};
 
 //initial state
-const initialState = {
+const initialState: InitialState = {
   recipes: [],
   loadingRecipes: [],
   isLoading: false,
@@ -14,24 +21,32 @@ const initialState = {
 // THUNKS
 export const getInitialRecipesAsync = createAsyncThunk(
   "getInitialRecipes",
-  async (searchParam, thunkAPI) => {
+  async (searchParam: string, thunkAPI) => {
     try {
       const result = await getInitialRecipesFromApi(searchParam);
       return result;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      if (err instanceof Error) {
+        return thunkAPI.rejectWithValue(err.message);
+      } else {
+        return thunkAPI.rejectWithValue("Unexpected error");
+      }
     }
   }
 );
 
 export const getRecipesWithParamAsync = createAsyncThunk(
   "getRecipesWithParam",
-  async (searchParam, thunkAPI) => {
+  async (searchParam: string, thunkAPI) => {
     try {
       const result = await getRecipesWithParamFromApi(searchParam);
       return result;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      if (err instanceof Error) {
+        return thunkAPI.rejectWithValue(err.message);
+      } else {
+        return thunkAPI.rejectWithValue("Unexpected error");
+      }
     }
   }
 );
@@ -45,10 +60,13 @@ const slice = createSlice({
       .addCase(getInitialRecipesAsync.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getInitialRecipesAsync.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.recipes = payload;
-      })
+      .addCase(
+        getInitialRecipesAsync.fulfilled,
+        (state, { payload }: PayloadAction<Recipes[]>) => {
+          state.isLoading = false;
+          state.recipes = payload;
+        }
+      )
       .addCase(getInitialRecipesAsync.rejected, (state, { error }) => {
         state.isLoading = false;
         state.error = error.message;
@@ -56,13 +74,16 @@ const slice = createSlice({
       .addCase(getRecipesWithParamAsync.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getRecipesWithParamAsync.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.recipes = payload?.length ? [...payload] : [...state.recipes];
-      })
+      .addCase(
+        getRecipesWithParamAsync.fulfilled,
+        (state, { payload }: PayloadAction<Recipes[]>) => {
+          state.isLoading = false;
+          state.recipes = payload?.length ? [...payload] : [...state.recipes];
+        }
+      )
       .addCase(getRecipesWithParamAsync.rejected, (state, { error }) => {
         state.isLoading = false;
-        state.error = error.message;
+        state.error = error.message || "Something went worng";
       });
   },
 });
