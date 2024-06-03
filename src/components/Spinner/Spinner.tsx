@@ -1,6 +1,6 @@
-import { Spinner as ChakraSpinner } from "@chakra-ui/react";
+import { Spinner as ChakraSpinner, SpinnerProps } from "@chakra-ui/react";
 
-const Spinner = (props) => (
+const Spinner = (props: SpinnerProps) => (
   <ChakraSpinner
     pos="fixed"
     top="50%"

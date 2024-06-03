@@ -1,19 +1,19 @@
-type Nutrients = { name: string; unit: string };
+type NutrientsProps = { nutrients: { name: string; unit: string } };
 
-type Recipe = {
-  id: number;
-  title: string;
-  image: string;
-  imageType: string;
-  nutrition: Nutrients[];
+export type RecipeProps = {
+  recipe: {
+    id: number;
+    title: string;
+    image: string;
+    imageType: string;
+    nutrition: NutrientsProps[];
+  };
 };
 
-export type Recipes = Recipe[];
+export type RecipesProps = { recipes: RecipeProps[] };
 
-export type Ingredient = {
-  id: number;
-  name: string;
-  image: string;
+export type IngredientProps = {
+  ingredient: { id: number; name: string; image: string };
 };
 
-export type Ingredients = Ingredient[];
+export type IngredientsProps = { ingredients: IngredientProps[] };

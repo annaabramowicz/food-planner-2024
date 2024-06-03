@@ -5,14 +5,14 @@ import {
 } from "services/foodApi";
 import { Recipes } from "lib/types";
 
-type InitialState = {
-  recipes: Recipes[];
-  loadingRecipes: null[];
-  isLoading: boolean;
-};
+// type InitialState = {
+//   recipes: Recipes[];
+//   loadingRecipes: null[];
+//   isLoading: boolean;
+// };
 
-//initial state
-const initialState: InitialState = {
+// //initial state
+const initialState = {
   recipes: [],
   loadingRecipes: [],
   isLoading: false,
@@ -21,7 +21,7 @@ const initialState: InitialState = {
 // THUNKS
 export const getInitialRecipesAsync = createAsyncThunk(
   "getInitialRecipes",
-  async (searchParam: string, thunkAPI) => {
+  async (searchParam, thunkAPI) => {
     try {
       const result = await getInitialRecipesFromApi(searchParam);
       return result;
@@ -37,7 +37,7 @@ export const getInitialRecipesAsync = createAsyncThunk(
 
 export const getRecipesWithParamAsync = createAsyncThunk(
   "getRecipesWithParam",
-  async (searchParam: string, thunkAPI) => {
+  async (searchParam, thunkAPI) => {
     try {
       const result = await getRecipesWithParamFromApi(searchParam);
       return result;
@@ -53,7 +53,7 @@ export const getRecipesWithParamAsync = createAsyncThunk(
 
 const slice = createSlice({
   name: "ingredients",
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -62,7 +62,7 @@ const slice = createSlice({
       })
       .addCase(
         getInitialRecipesAsync.fulfilled,
-        (state, { payload }: PayloadAction<Recipes[]>) => {
+        (state, { payload }) => {
           state.isLoading = false;
           state.recipes = payload;
         }
@@ -76,7 +76,7 @@ const slice = createSlice({
       })
       .addCase(
         getRecipesWithParamAsync.fulfilled,
-        (state, { payload }: PayloadAction<Recipes[]>) => {
+        (state, { payload }) => {
           state.isLoading = false;
           state.recipes = payload?.length ? [...payload] : [...state.recipes];
         }

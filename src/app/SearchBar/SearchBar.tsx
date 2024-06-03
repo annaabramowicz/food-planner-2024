@@ -6,13 +6,13 @@ import { getRecipesWithParamAsync } from "store/recipes/recipes";
 import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
-import InputGroup from "components/Input/InputGroup/InputGroup";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
+import InputGroup, { InputGroupProps } from "components/Input/InputGroup/InputGroup";
 
-type SearchBar = React.CSSProperties;
+type SearchBarProps = InputGroupProps;
 
 const debounceSearchAsync = debounce(
   (dispatch, searchValue, searchBarAction, postAction) => {
@@ -25,7 +25,7 @@ const debounceSearchAsync = debounce(
   { leading: false }
 );
 
-const SearchBar = (props: SearchBar) => {
+const SearchBar = (props: SearchBarProps) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();

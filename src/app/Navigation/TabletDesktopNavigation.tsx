@@ -1,4 +1,4 @@
-import NavigationLogo from "app/NavigationLogo/NavigationLogo";
+import NavigationLogo from "./NavigationLogo/NavigationLogo";
 import SearchBar from "app/SearchBar/SearchBar";
 import {
   colorFourth,

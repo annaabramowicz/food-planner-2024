@@ -7,13 +7,14 @@ import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
 import { useDispatch } from "react-redux";
+import { IngredientProps } from "lib/types";
 
 const hoverUIstyle = {
   boxShadow: `0px 0px 0px 1px ${colorSixth}`,
   cursor: "pointer",
 };
 
-const FridgeIngredient = ({ ingredient }) => {
+const FridgeIngredient = ({ ingredient }: IngredientProps) => {
   const dispatch = useDispatch();
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;

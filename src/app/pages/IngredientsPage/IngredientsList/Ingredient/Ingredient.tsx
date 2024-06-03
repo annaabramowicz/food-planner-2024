@@ -15,6 +15,7 @@ import {
   saveIngredientToFridgeAsync,
 } from "store/fridge/fridge";
 import { useDispatch, useSelector } from "react-redux";
+import { IngredientProps } from "lib/types";
 
 const hoverUIstylePointer = {
   boxShadow: `0px 0px 0px 2px ${colorPrimaryDark}`,
@@ -27,7 +28,7 @@ const hoverUIstyle = {
   color: colorPrimary,
 };
 
-const Ingredient = ({ ingredient }) => {
+const Ingredient = ({ ingredient }: IngredientProps) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector((state) => state.fridge);
   const imageSize = `100x100`;

@@ -1,11 +1,11 @@
 import Flex from "components/Flex/Flex";
 import Recipe from "./Recipe/Recipe";
+import { RecipesProps } from "lib/types";
 
-const RecipesList = ({rederedRecipes}) => {
-  
+const RecipesList = ({ renderedRecipes }: RecipesProps) => {
   return (
     <Flex mt={2} flexWrap="wrap" justifyContent="space-around">
-      {rederedRecipes?.map((recipe) => {
+      {renderedRecipes?.map((recipe) => {
         return <Recipe key={recipe.id} recipe={recipe} />;
       })}
     </Flex>

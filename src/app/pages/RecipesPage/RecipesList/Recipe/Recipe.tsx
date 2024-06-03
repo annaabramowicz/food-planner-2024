@@ -2,15 +2,12 @@ import Image from "components/Image/Image";
 import Flex from "components/Flex/Flex";
 import Box from "components/Box/Box";
 import Heading from "components/Heading/Heading";
-import {
-  colorFifth,
-  colorFourth,
-  colorSecondary,
-} from "app/style/theme/theme";
+import { colorFifth, colorFourth, colorSecondary } from "app/style/theme/theme";
 import { Icon, Tag } from "@chakra-ui/react";
 import { IoFlameOutline } from "react-icons/io5";
+import { RecipeProps } from "lib/types";
 
-const Recipe = ({ recipe }) => {
+const Recipe = ({ recipe }: RecipeProps) => {
   const [calories, protein, fat, carb] = recipe.nutrition.nutrients;
 
   return (
