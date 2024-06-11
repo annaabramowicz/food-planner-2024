@@ -6,7 +6,7 @@ import {
 } from "services/localStorage";
 
 //initial state
-const initialState = { ingredients: getIngredientsFromLocalStorage() || [] };
+const initialState = { ingredients: getIngredientsFromLocalStorage()};
 
 export const saveIngredientToFridgeAsync = createAsyncThunk(
   "saveIngredientToFridge",

@@ -8,7 +8,7 @@ const IngredientsPage = () => {
 
   return (
     <>
-      <IngredientsList ingredients={ingredients.ingredients} />
+      <IngredientsList ingredients={ingredients} />
       {isLoading && <Spinner />}
     </>
   );

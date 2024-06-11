@@ -1,19 +1,34 @@
-type NutrientsProps = { nutrients: { name: string; unit: string } };
-
 export type RecipeProps = {
   recipe: {
     id: number;
     title: string;
     image: string;
     imageType: string;
-    nutrition: NutrientsProps[];
+    nutrition: {
+      nutrients: { name: string; unit: string; amount: number }[];
+    };
   };
 };
 
-export type RecipesProps = { recipes: RecipeProps[] };
+export type RecipesProps = {
+  renderedRecipes: {
+    id: number;
+    title: string;
+    image: string;
+    imageType: string;
+    nutrition: {
+      nutrients: { name: string; unit: string; amount: number }[];
+    };
+  }[];
+};
 
 export type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
 };
 
-export type IngredientsProps = { ingredients: IngredientProps[] };
+export type IngredientsProps = {
+  ingredients: {
+    ingredients: { id: number; name: string; image: string }[];
+  };
+  isLoading?: boolean;
+};
