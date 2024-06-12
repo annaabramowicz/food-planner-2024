@@ -21,6 +21,30 @@ export type RecipesProps = {
     };
   }[];
 };
+export type RecipesResponse = {
+  results: ResultRecipesResponse[];
+  offset: number;
+  number: number;
+  totalResults: number;
+};
+
+export type ResultRecipesResponse = {
+  id: number;
+  title: string;
+  image: string;
+  imageType: string;
+  nutrition: Nutrition;
+};
+
+export type Nutrition = {
+  nutrients: Nutrient[];
+};
+
+export type Nutrient = {
+  name: string;
+  amount: number;
+  unit: string;
+};
 
 export type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -31,4 +55,17 @@ export type IngredientsProps = {
     ingredients: { id: number; name: string; image: string }[];
   };
   isLoading?: boolean;
+};
+
+export type IngredientsResponse = {
+  results: ResultIngredientsResponse[];
+  offset: number;
+  number: number;
+  totalResults: number;
+};
+
+export type ResultIngredientsResponse = {
+  id: number;
+  name: string;
+  image: string;
 };
