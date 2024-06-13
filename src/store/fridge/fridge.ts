@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ResultIngredientsResponse } from "lib/types";
 import {
   getIngredientsFromLocalStorage,
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
 
-//initial state
-const initialState = { ingredients: getIngredientsFromLocalStorage()};
+type InitialState = {
+  ingredients: ResultIngredientsResponse[];
+};
+
+const initialState: InitialState = {
+  ingredients: getIngredientsFromLocalStorage(),
+};
 
 export const saveIngredientToFridgeAsync = createAsyncThunk(
   "saveIngredientToFridge",

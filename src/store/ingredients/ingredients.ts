@@ -1,19 +1,32 @@
 import { getIngredientsWithParamFromApi } from "services/foodApi";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import initialIngredients from "./initialIngredients";
+import { ResultIngredientsResponse } from "lib/types";
 
-//initial state
-const initialState = { ingredients: initialIngredients, isLoading: false };
+type InitialState = {
+  ingredients: ResultIngredientsResponse[];
+  isLoading: boolean;
+  error?: null | string;
+};
 
-// THUNKS
+const initialState: InitialState = {
+  ingredients: initialIngredients,
+  isLoading: false,
+  error: null,
+};
+
 export const getIngredientsWithParamAsync = createAsyncThunk(
   "getIngredientsWithParam",
-  async (searchParam, thunkAPI) => {
+  async (searchParam: string, thunkAPI) => {
     try {
       const result = await getIngredientsWithParamFromApi(searchParam);
       return result;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      if (err instanceof Error) {
+        return thunkAPI.rejectWithValue(err.message);
+      } else {
+        return thunkAPI.rejectWithValue("An unknown error occurred");
+      }
     }
   }
 );
