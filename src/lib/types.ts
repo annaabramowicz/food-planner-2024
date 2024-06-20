@@ -1,34 +1,11 @@
-export type RecipeProps = {
-  recipe: {
-    id: number;
-    title: string;
-    image: string;
-    imageType: string;
-    nutrition: {
-      nutrients: { name: string; unit: string; amount: number }[];
-    };
-  };
-};
-
-export type RecipesProps = {
-  renderedRecipes: {
-    id: number;
-    title: string;
-    image: string;
-    imageType: string;
-    nutrition: {
-      nutrients: { name: string; unit: string; amount: number }[];
-    };
-  }[];
-};
 export type RecipesResponse = {
-  results: ResultRecipesResponse[];
+  results: Recipe[];
   offset: number;
   number: number;
   totalResults: number;
 };
 
-export type ResultRecipesResponse = {
+export type Recipe = {
   id: number;
   title: string;
   image: string;
@@ -46,25 +23,14 @@ export type Nutrient = {
   unit: string;
 };
 
-export type IngredientProps = {
-  ingredient: { id: number; name: string; image: string };
-};
-
-export type IngredientsProps = {
-  ingredients: {
-    ingredients: { id: number; name: string; image: string }[];
-  };
-  isLoading?: boolean;
-};
-
 export type IngredientsResponse = {
-  results: ResultIngredientsResponse[];
+  results: Ingredient[];
   offset: number;
   number: number;
   totalResults: number;
 };
 
-export type ResultIngredientsResponse = {
+export type Ingredient = {
   id: number;
   name: string;
   image: string;

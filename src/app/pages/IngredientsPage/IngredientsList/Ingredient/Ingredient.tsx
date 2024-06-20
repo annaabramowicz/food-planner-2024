@@ -13,9 +13,13 @@ import config from "config/env";
 import {
   removeIngredientFromFridgeAsync,
   saveIngredientToFridgeAsync,
+  useFridgeData,
 } from "store/fridge/fridge";
-import { useDispatch, useSelector } from "react-redux";
-import { IngredientProps } from "lib/types";
+import { useAppDispatch } from "store/store";
+
+type IngredientProps = {
+  ingredient: { id: number; name: string; image: string };
+};
 
 const hoverUIstylePointer = {
   boxShadow: `0px 0px 0px 2px ${colorPrimaryDark}`,
@@ -29,8 +33,8 @@ const hoverUIstyle = {
 };
 
 const Ingredient = ({ ingredient }: IngredientProps) => {
-  const dispatch = useDispatch();
-  const { ingredients } = useSelector((state) => state.fridge);
+  const dispatch = useAppDispatch();
+  const { ingredients } = useFridgeData();
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 

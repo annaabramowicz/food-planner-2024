@@ -6,11 +6,11 @@ import Box from "components/Box/Box";
 import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
-import { useDispatch } from "react-redux";
 import { getInitialRecipesAsync } from "store/recipes/recipes";
+import { useAppDispatch } from "store/store";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   useEffect(() => {

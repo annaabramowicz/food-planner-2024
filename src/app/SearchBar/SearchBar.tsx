@@ -1,16 +1,18 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { getRecipesWithParamAsync } from "store/recipes/recipes";
 import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
-import InputGroup, { InputGroupProps } from "components/Input/InputGroup/InputGroup";
+import InputGroup, {
+  InputGroupProps,
+} from "components/Input/InputGroup/InputGroup";
+import { useAppDispatch } from "store/store";
 
 type SearchBarProps = InputGroupProps;
 
@@ -26,7 +28,7 @@ const debounceSearchAsync = debounce(
 );
 
 const SearchBar = (props: SearchBarProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isCurrentRouteIngredients = pathname === "/ingredients";

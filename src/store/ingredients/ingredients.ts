@@ -1,10 +1,12 @@
 import { getIngredientsWithParamFromApi } from "services/foodApi";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import initialIngredients from "./initialIngredients";
-import { ResultIngredientsResponse } from "lib/types";
+import { Ingredient } from "lib/types";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 type InitialState = {
-  ingredients: ResultIngredientsResponse[];
+  ingredients: Ingredient[];
   isLoading: boolean;
   error?: null | string;
 };
@@ -35,6 +37,9 @@ const slice = createSlice({
   name: "ingredients",
   initialState: initialState,
   reducers: {},
+  // selectors: {
+  //   ingredientsData: (state) => state.ingredients,
+  // },
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsWithParamAsync.pending, (state) => {
@@ -50,5 +55,9 @@ const slice = createSlice({
       });
   },
 });
+
+export const useIngredientsData = () =>
+  useSelector((state: RootState) => state.ingredients);
+//  export const { ingredientsData } = slice.selectors;
 
 export default slice.reducer;

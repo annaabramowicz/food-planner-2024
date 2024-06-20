@@ -1,11 +1,11 @@
 import RecipesList from "./RecipesList/RecipesList";
 import Spinner from "components/Spinner/Spinner";
-import { useSelector } from "react-redux";
+import { useRecipesData } from "store/recipes/recipes";
 
 const RecipesPage = () => {
-  const recipesState = useSelector((state) => state.recipes);
+  const recipesState = useRecipesData();
   const { recipes, loadingRecipes, isLoading } = recipesState;
-  const renderedRecipes = isLoading ? loadingRecipes: recipes;    
+  const renderedRecipes = isLoading ? loadingRecipes : recipes;
 
   return (
     <>

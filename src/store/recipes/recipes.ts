@@ -3,11 +3,13 @@ import {
   getInitialRecipesFromApi,
   getRecipesWithParamFromApi,
 } from "services/foodApi";
-import { ResultRecipesResponse } from "lib/types";
+import { Recipe } from "lib/types";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 type InitialState = {
-  recipes: ResultRecipesResponse[];
-  loadingRecipes: null[] | ResultRecipesResponse[];
+  recipes: Recipe[];
+  loadingRecipes: null[] | Recipe[];
   isLoading: boolean;
   error?: string | null;
 };
@@ -81,5 +83,8 @@ const slice = createSlice({
       });
   },
 });
+
+export const useRecipesData = () =>
+  useSelector((state: RootState) => state.recipes);
 
 export default slice.reducer;

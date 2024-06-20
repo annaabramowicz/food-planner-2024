@@ -1,22 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ResultIngredientsResponse } from "lib/types";
+import { Ingredient } from "lib/types";
+import { useSelector } from "react-redux";
 import {
   getIngredientsFromLocalStorage,
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
+import { RootState } from "store/store";
 
-type InitialState = {
-  ingredients: ResultIngredientsResponse[];
-};
-
-const initialState: InitialState = {
+const initialState = {
   ingredients: getIngredientsFromLocalStorage(),
 };
 
 export const saveIngredientToFridgeAsync = createAsyncThunk(
   "saveIngredientToFridge",
-  (ingredient: ResultIngredientsResponse, thunkAPI) => {
+  (ingredient: Ingredient, thunkAPI) => {
     saveIngredientInLocalStorage(ingredient);
     thunkAPI.dispatch(saveIngredientToFridge(ingredient));
   }
@@ -44,6 +42,9 @@ const slice = createSlice({
     },
   },
 });
+
+export const useFridgeData = () =>
+  useSelector((state: RootState) => state.fridge);
 
 export const { saveIngredientToFridge, removeIngredientFromFridge } =
   slice.actions;

@@ -5,7 +5,18 @@ import Heading from "components/Heading/Heading";
 import { colorFifth, colorFourth, colorSecondary } from "app/style/theme/theme";
 import { Icon, Tag } from "@chakra-ui/react";
 import { IoFlameOutline } from "react-icons/io5";
-import { RecipeProps } from "lib/types";
+
+type RecipeProps = {
+  recipe: {
+    id: number;
+    title: string;
+    image: string;
+    imageType: string;
+    nutrition: {
+      nutrients: { name: string; unit: string; amount: number }[];
+    };
+  };
+};
 
 const Recipe = ({ recipe }: RecipeProps) => {
   const [calories, protein, fat, carb] = recipe.nutrition.nutrients;

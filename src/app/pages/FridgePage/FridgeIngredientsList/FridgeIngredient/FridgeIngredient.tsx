@@ -6,8 +6,11 @@ import Circle from "components/Circle/Circle";
 import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
-import { useDispatch } from "react-redux";
-import { IngredientProps } from "lib/types";
+import { useAppDispatch } from "store/store";
+
+type IngredientProps = {
+  ingredient: { id: number; name: string; image: string };
+};
 
 const hoverUIstyle = {
   boxShadow: `0px 0px 0px 1px ${colorSixth}`,
@@ -15,7 +18,7 @@ const hoverUIstyle = {
 };
 
 const FridgeIngredient = ({ ingredient }: IngredientProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
@@ -51,9 +54,9 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
         right="-4px"
         border={`1px solid ${colorFourth}`}
         bg={colorFifth}
-        borderRadius="25px"
-        height="25px"
-        width="25px"
+        // borderRadius="25px"
+        // height="25px"
+        // width="25px"
         color={colorSixth}
         _hover={hoverUIstyle}
       >
@@ -63,4 +66,4 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
   );
 };
 
-export default FridgeIngredient;
+export default FridgeIngredient; 

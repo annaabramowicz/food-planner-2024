@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
+import { useFridgeData } from "store/fridge/fridge";
 import FridgeIngredientsList from "./FridgeIngredientsList/FridgeIngredientsList";
 
 const FridgePage = () => {
-  const fridgeIngredients = useSelector((state) => state.fridge);
+  const fridgeIngredients = useFridgeData();
 
   return (
     <>
