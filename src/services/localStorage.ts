@@ -1,4 +1,11 @@
-import { Ingredient } from "lib/types";
+import { z } from "zod";
+
+const IngredientSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  image: z.string(),
+});
+type IngredientType = z.infer<typeof IngredientSchema>;
 
 const FRIDGE = "fridge";
 
@@ -6,7 +13,7 @@ export const getIngredientsFromLocalStorage = () => {
   try {
     const value = localStorage.getItem(FRIDGE);
     if (value !== null) {
-      return JSON.parse(value) as Ingredient[];
+      return JSON.parse(value) as IngredientType[];
     }
     return [];
   } catch (e) {
@@ -19,7 +26,7 @@ export const getIngredientsFromLocalStorage = () => {
   }
 };
 
-export const saveIngredientInLocalStorage = (ingredient: Ingredient) => {
+export const saveIngredientInLocalStorage = (ingredient: IngredientType) => {
   let existingFridge = getIngredientsFromLocalStorage();
   const newFridge = [...existingFridge, ingredient];
   try {
