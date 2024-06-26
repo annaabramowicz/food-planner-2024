@@ -9,14 +9,12 @@ import { RootState } from "store/store";
 
 type InitialState = {
   recipes: Recipe[];
-  loadingRecipes: Recipe[];
   isLoading: boolean;
   error?: string | null;
 };
 
 const initialState: InitialState = {
   recipes: [],
-  loadingRecipes: [],
   isLoading: false,
   error: null,
 };
@@ -40,6 +38,7 @@ export const getInitialRecipesAsync = createAsyncThunk(
 export const getRecipesWithParamAsync = createAsyncThunk(
   "getRecipesWithParam",
   async (searchParam: string, thunkAPI) => {
+    thunkAPI.dispatch(clearRecipesBeforeApiResponse());
     try {
       const result = await getRecipesWithParamFromApi(searchParam);
       return result;
@@ -54,9 +53,13 @@ export const getRecipesWithParamAsync = createAsyncThunk(
 );
 
 const slice = createSlice({
-  name: "ingredients",
+  name: "recipes",
   initialState,
-  reducers: {},
+  reducers: {
+    clearRecipesBeforeApiResponse: (state) => {
+      state.recipes = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getInitialRecipesAsync.pending, (state) => {
@@ -86,5 +89,7 @@ const slice = createSlice({
 
 export const useRecipesData = () =>
   useSelector((state: RootState) => state.recipes);
+
+export const { clearRecipesBeforeApiResponse } = slice.actions;
 
 export default slice.reducer;

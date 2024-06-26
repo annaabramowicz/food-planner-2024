@@ -14,7 +14,7 @@ const initialState = {
 
 export const saveIngredientToFridgeAsync = createAsyncThunk(
   "saveIngredientToFridge",
-  (ingredient: Ingredient[], thunkAPI) => {
+  (ingredient: Ingredient, thunkAPI) => {
     saveIngredientInLocalStorage(ingredient);
     thunkAPI.dispatch(saveIngredientToFridge(ingredient));
   }
@@ -28,7 +28,7 @@ export const removeIngredientFromFridgeAsync = createAsyncThunk(
   }
 );
 
-const slice = createSlice({
+const slice = createSlice({ 
   name: "fridge",
   initialState: initialState,
   reducers: {

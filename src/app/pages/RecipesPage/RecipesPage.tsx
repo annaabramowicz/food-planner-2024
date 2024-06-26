@@ -4,12 +4,11 @@ import { useRecipesData } from "store/recipes/recipes";
 
 const RecipesPage = () => {
   const recipesState = useRecipesData();
-  const { recipes, loadingRecipes, isLoading } = recipesState;
-  const renderedRecipes = isLoading ? loadingRecipes : recipes;
+  const { recipes, isLoading } = recipesState;
 
   return (
     <>
-      <RecipesList renderedRecipes={renderedRecipes} />
+      <RecipesList renderedRecipes={recipes} />
       {isLoading && <Spinner />}
     </>
   );

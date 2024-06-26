@@ -1,6 +1,5 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { useLocation, useNavigate } from "react-router-dom";
-// 
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { getRecipesWithParamAsync } from "store/recipes/recipes";
 import { debounce } from "lodash-es";
