@@ -4,6 +4,7 @@ import { useIngredientsData } from "store/ingredients/ingredients";
 
 const IngredientsPage = () => {
   const ingredients = useIngredientsData();
+
   const { isLoading } = ingredients;
 
   return (
@@ -15,4 +16,3 @@ const IngredientsPage = () => {
 };
 
 export default IngredientsPage;
-  

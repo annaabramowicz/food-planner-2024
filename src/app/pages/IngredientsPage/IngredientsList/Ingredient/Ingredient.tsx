@@ -35,6 +35,7 @@ const hoverUIstyle = {
 const Ingredient = ({ ingredient }: IngredientProps) => {
   const dispatch = useAppDispatch();
   const { ingredients } = useFridgeData();
+
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
