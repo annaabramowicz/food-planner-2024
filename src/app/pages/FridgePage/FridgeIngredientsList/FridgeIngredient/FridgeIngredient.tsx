@@ -54,9 +54,6 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
         right="-4px"
         border={`1px solid ${colorFourth}`}
         bg={colorFifth}
-        // borderRadius="25px"
-        // height="25px"
-        // width="25px"
         color={colorSixth}
         _hover={hoverUIstyle}
       >
@@ -66,4 +63,4 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
   );
 };
 
-export default FridgeIngredient; 
+export default FridgeIngredient;

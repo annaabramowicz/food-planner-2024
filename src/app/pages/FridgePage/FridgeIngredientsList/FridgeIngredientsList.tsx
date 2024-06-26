@@ -1,14 +1,14 @@
 import Flex from "components/Flex/Flex";
 import FridgeIngredient from "./FridgeIngredient/FridgeIngredient";
+import { Ingredient as FridgeIngredientProps } from "lib/types";
 
-type IngredientsProps = {
+type FridgeIngredientsProps = {
   ingredients: {
-    ingredients: { id: number; name: string; image: string }[];
+    ingredients: FridgeIngredientProps[];
   };
   isLoading?: boolean;
 };
-
-const FridgeIngredientsList = ({ ingredients }: IngredientsProps) => {
+const FridgeIngredientsList = ({ ingredients }: FridgeIngredientsProps) => {
   return (
     <Flex mt={2} flexWrap="wrap" justifyContent="space-around">
       {ingredients.ingredients.map((ingredient) => {

@@ -9,7 +9,7 @@ import { RootState } from "store/store";
 
 type InitialState = {
   recipes: Recipe[];
-  loadingRecipes: null[] | Recipe[];
+  loadingRecipes: Recipe[];
   isLoading: boolean;
   error?: string | null;
 };

@@ -1,9 +1,10 @@
 import Flex from "components/Flex/Flex";
 import Ingredient from "./Ingredient/Ingredient";
+import { Ingredient as IngredientProps } from "lib/types";
 
 type IngredientsProps = {
   ingredients: {
-    ingredients: { id: number; name: string; image: string }[];
+    ingredients: IngredientProps[];
   };
   isLoading?: boolean;
 };

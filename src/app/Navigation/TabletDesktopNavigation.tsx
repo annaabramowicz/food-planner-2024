@@ -6,7 +6,7 @@ import {
   colorPrimaryDark,
 } from "app/style/theme/theme";
 import Box from "components/Box/Box";
-import Flex from "components/Flex/Flex";
+import Flex, { FlexProps } from "components/Flex/Flex";
 import { NavLink, useLocation } from "react-router-dom";
 import routes from "routes/routes";
 
@@ -30,7 +30,7 @@ function TabletDesktopNavigation() {
             zIndex={1}
           >
             {routes.map((route) => {
-              const activeLinkStyle =
+              const activeLinkStyle: FlexProps =
                 location.pathname === route.path
                   ? {
                       color: { colorPrimary },
@@ -62,7 +62,7 @@ function TabletDesktopNavigation() {
             })}
           </Flex>
         </Flex>
-        <SearchBar minW="105px" w="200px" bg="white"/>
+        <SearchBar minW="105px" w="200px" bg="white" />
       </Flex>
       <Box
         width="130%"
