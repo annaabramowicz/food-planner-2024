@@ -6,7 +6,7 @@ import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
 import { ChangeEvent } from "react";
-import Input from "components/Input/Input";
+import Input
 import Icon from "components/Icon/Icon";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
 import InputGroup, {
