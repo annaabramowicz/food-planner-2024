@@ -1,5 +1,7 @@
+import 'vite/client'
+
 const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: import.meta.env.REACT_APP_API_KEY,
   apiCdnUrl: `https://spoonacular.com/cdn/`,
   apiUrl: `https://api.spoonacular.com/`,
 };
