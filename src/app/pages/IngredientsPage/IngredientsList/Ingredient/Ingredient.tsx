@@ -10,7 +10,7 @@ import {
 } from "app/style/theme/theme";
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
-import { useFridgeIngredients } from "store/fridge/useFridgeIngredients";
+import { useFridgeIngredients } from "hooks/useFridgeIngredients"; 
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
