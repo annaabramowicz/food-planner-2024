@@ -1,12 +1,15 @@
 import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "react-use";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
 import { getRecipesWithParamAsync } from "store/recipes/recipes";
+import { useAppDispatch } from "store/store";
 
 const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isCurrentRouteIngredients = pathname === "/ingredients";
   const isCurrentRouteRecipes = pathname === "/recipes";
@@ -18,14 +21,14 @@ const useSearch = () => {
 
   const searchBarAction = (value: string) =>
     isCurrentRouteIngredients
-      ? getIngredientsWithParamAsync(value)
-      : getRecipesWithParamAsync(value);
+      ? dispatch(getIngredientsWithParamAsync(value))
+      : dispatch(getRecipesWithParamAsync(value));
 
   useDebounce(
     () => {
       if (postAction && searchTerm) postAction();
       if (searchTerm !== "") {
-        dispatchEvent(searchBarAction(searchTerm));
+        (searchBarAction(searchTerm));
       }
     },
     2000,
