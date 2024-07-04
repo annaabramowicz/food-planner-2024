@@ -55,6 +55,9 @@ export const getRecipesWithParamAsync = createAsyncThunk(
 const slice = createSlice({
   name: "recipes",
   initialState,
+  selectors: {
+    recipesData: (state) => state,
+  },
   reducers: {
     clearRecipesBeforeApiResponse: (state) => {
       state.recipes = [];
@@ -87,8 +90,7 @@ const slice = createSlice({
   },
 });
 
-export const useRecipesData = () =>
-  useSelector((state: RootState) => state.recipes);
+export const useRecipesData = () => useSelector(slice.selectors.recipesData);
 
 export const { clearRecipesBeforeApiResponse } = slice.actions;
 
