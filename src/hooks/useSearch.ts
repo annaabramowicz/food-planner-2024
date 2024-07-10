@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "react-use";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
@@ -28,7 +27,7 @@ const useSearch = () => {
     () => {
       if (postAction && searchTerm) postAction();
       if (searchTerm !== "") {
-        (searchBarAction(searchTerm));
+        searchBarAction(searchTerm);
       }
     },
     2000,

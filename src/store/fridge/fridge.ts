@@ -6,7 +6,6 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
-import { RootState } from "store/store";
 
 const initialState = {
   ingredients: getIngredientsFromLocalStorage(),
