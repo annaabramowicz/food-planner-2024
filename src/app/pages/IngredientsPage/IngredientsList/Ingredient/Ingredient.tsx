@@ -80,6 +80,7 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
           pos="absolute"
           backgroundColor={colorPrimary}
           color={colorFifth}
+          data-testid="checkmark"
         >
           <Icon as={IoCheckmark} height="15px" />
         </Circle>

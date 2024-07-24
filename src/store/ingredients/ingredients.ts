@@ -3,11 +3,17 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import initialIngredients from "./initialIngredients";
 import { Ingredient } from "lib/types";
 import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 type InitialState = {
   ingredients: Ingredient[];
   isLoading: boolean;
   error?: null | string;
+};
+
+type ThunkAPIConfig = {
+  state: RootState;
+  rejectValue: string;
 };
 
 const initialState: InitialState = {
@@ -16,21 +22,22 @@ const initialState: InitialState = {
   error: null,
 };
 
-export const getIngredientsWithParamAsync = createAsyncThunk(
-  "getIngredientsWithParam",
-  async (searchParam: string, thunkAPI) => {
-    try {
-      const result = await getIngredientsWithParamFromApi(searchParam);
-      return result;
-    } catch (err) {
-      if (err instanceof Error) {
-        return thunkAPI.rejectWithValue(err.message);
-      } else {
-        return thunkAPI.rejectWithValue("An unknown error occurred");
-      }
+export const getIngredientsWithParamAsync = createAsyncThunk<
+  Ingredient[],
+  string,
+  ThunkAPIConfig
+>("getIngredientsWithParam", async (searchParam: string, thunkAPI) => {
+  try {
+    const result = await getIngredientsWithParamFromApi(searchParam);
+    return result;
+  } catch (err) {
+    if (err instanceof Error) {
+      return thunkAPI.rejectWithValue(err.message);
+    } else {
+      return thunkAPI.rejectWithValue("An unknown error occurred");
     }
   }
-);
+});
 
 const slice = createSlice({
   name: "ingredients",

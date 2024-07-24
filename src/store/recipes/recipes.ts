@@ -13,44 +13,51 @@ type InitialState = {
   error?: string | null;
 };
 
+type ThunkAPIConfig = {
+  state: RootState;
+  rejectValue: string;
+};
+
 const initialState: InitialState = {
   recipes: [],
   isLoading: false,
   error: null,
 };
 
-export const getInitialRecipesAsync = createAsyncThunk(
-  "getInitialRecipes",
-  async (_, thunkAPI) => {
-    try {
-      const result = await getInitialRecipesFromApi();
-      return result;
-    } catch (err) {
-      if (err instanceof Error) {
-        return thunkAPI.rejectWithValue(err.message);
-      } else {
-        return thunkAPI.rejectWithValue("Unexpected error");
-      }
+export const getInitialRecipesAsync = createAsyncThunk<
+  Recipe[],
+  void,
+  ThunkAPIConfig
+>("getInitialRecipes", async (_, thunkAPI) => {
+  try {
+    const result = await getInitialRecipesFromApi();
+    return result;
+  } catch (err) {
+    if (err instanceof Error) {
+      return thunkAPI.rejectWithValue(err.message);
+    } else {
+      return thunkAPI.rejectWithValue("Unexpected error");
     }
   }
-);
+});
 
-export const getRecipesWithParamAsync = createAsyncThunk(
-  "getRecipesWithParam",
-  async (searchParam: string, thunkAPI) => {
-    thunkAPI.dispatch(clearRecipesBeforeApiResponse());
-    try {
-      const result = await getRecipesWithParamFromApi(searchParam);
-      return result;
-    } catch (err) {
-      if (err instanceof Error) {
-        return thunkAPI.rejectWithValue(err.message);
-      } else {
-        return thunkAPI.rejectWithValue("Unexpected error");
-      }
+export const getRecipesWithParamAsync = createAsyncThunk<
+  Recipe[],
+  string,
+  ThunkAPIConfig
+>("getRecipesWithParam", async (searchParam: string, thunkAPI) => {
+  thunkAPI.dispatch(clearRecipesBeforeApiResponse());
+  try {
+    const result = await getRecipesWithParamFromApi(searchParam);
+    return result;
+  } catch (err) {
+    if (err instanceof Error) {
+      return thunkAPI.rejectWithValue(err.message);
+    } else {
+      return thunkAPI.rejectWithValue("Unexpected error");
     }
   }
-);
+});
 
 const slice = createSlice({
   name: "recipes",
