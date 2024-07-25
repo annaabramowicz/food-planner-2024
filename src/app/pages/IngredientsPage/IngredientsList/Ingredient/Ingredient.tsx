@@ -10,12 +10,7 @@ import {
 } from "app/style/theme/theme";
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
-import {
-  removeIngredientFromFridgeAsync,
-  saveIngredientToFridgeAsync,
-  useFridgeData,
-} from "store/fridge/fridge";
-import { useAppDispatch } from "store/store";
+import { useFridgeIngredients } from "hooks/useFridgeIngredients"; 
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -33,20 +28,17 @@ const hoverUIstyle = {
 };
 
 const Ingredient = ({ ingredient }: IngredientProps) => {
-  const dispatch = useAppDispatch();
-  const { ingredients } = useFridgeData();
+  const { removeFridgeIngredient, saveFridgeIngredient, isIngredientInFridge } =
+    useFridgeIngredients();
 
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
-
-  const isIngredientSelected = ingredients.some(
-    (storeIngredient) => storeIngredient.id === ingredient.id
-  );
+  const isIngredientSelected = isIngredientInFridge(ingredient.id);
 
   const toggleClick = () => {
     isIngredientSelected
-      ? dispatch(removeIngredientFromFridgeAsync(ingredient.id))
-      : dispatch(saveIngredientToFridgeAsync(ingredient));
+      ? removeFridgeIngredient(ingredient.id)
+      : saveFridgeIngredient(ingredient);
   };
 
   return (

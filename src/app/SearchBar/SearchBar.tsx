@@ -1,37 +1,25 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
-import { getRecipesWithParamAsync } from "store/recipes/recipes";
-import { debounce } from "lodash-es";
+import { useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
-import { ChangeEvent } from "react";
 import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
+import InputRightElement from "components/Input/InputRightElement/InputRightElement";
 import InputGroup, {
   InputGroupProps,
 } from "components/Input/InputGroup/InputGroup";
-import { useAppDispatch } from "store/store";
+import Spinner from "components/Spinner/Spinner";
+import useLoadingState from "hooks/useLoadingState";
+import useSearch from "hooks/useSearch";
 
 type SearchBarProps = InputGroupProps;
-const debounceSearchAsync = debounce(
-  (dispatch, searchValue, searchBarAction, postAction) => {
-    if (postAction && searchValue) postAction();
-    if (searchValue !== "") {
-      dispatch(searchBarAction(searchValue));
-    }
-  },
-  2000,
-  { leading: false }
-);
 
 const SearchBar = (props: SearchBarProps) => {
-  const dispatch = useAppDispatch();
+  const isLoading = useLoadingState();
+  const handleChange = useSearch();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const isCurrentRouteIngredients = pathname === "/ingredients";
-  const isCurrentRouteRecipes = pathname === "/recipes";
 
   const searchByPlaceholder = `Search by ${
     isCurrentRouteIngredients ? `ingredients` : `recipes`
@@ -42,18 +30,6 @@ const SearchBar = (props: SearchBarProps) => {
     sm: "Search",
     md: searchByPlaceholder,
   });
-
-  const searchBarAction = isCurrentRouteIngredients
-    ? getIngredientsWithParamAsync
-    : getRecipesWithParamAsync;
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const postAction =
-      !isCurrentRouteIngredients && !isCurrentRouteRecipes
-        ? () => navigate("/recipes")
-        : undefined;
-    debounceSearchAsync(dispatch, e.target.value, searchBarAction, postAction);
-  };
 
   return (
     <InputGroup
@@ -73,6 +49,7 @@ const SearchBar = (props: SearchBarProps) => {
         focusBorderColor={colorPrimary}
         fontSize="0.9em"
       />
+      <InputRightElement>{isLoading && <Spinner />}</InputRightElement>
     </InputGroup>
   );
 };
