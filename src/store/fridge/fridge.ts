@@ -6,6 +6,7 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
+import { RootState } from "store/store";
 
 type ThunkAPIConfig = {
   state: RootState;

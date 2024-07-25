@@ -5,6 +5,7 @@ import {
 } from "services/foodApi";
 import { Recipe } from "lib/types";
 import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 type InitialState = {
   recipes: Recipe[];
