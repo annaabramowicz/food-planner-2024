@@ -5,7 +5,6 @@ import {
 } from "services/foodApi";
 import { Recipe } from "lib/types";
 import { useSelector } from "react-redux";
-import { RootState } from "store/store";
 
 type InitialState = {
   recipes: Recipe[];
@@ -62,6 +61,9 @@ export const getRecipesWithParamAsync = createAsyncThunk<
 const slice = createSlice({
   name: "recipes",
   initialState,
+  selectors: {
+    recipesData: (state) => state,
+  },
   reducers: {
     clearRecipesBeforeApiResponse: (state) => {
       state.recipes = [];
@@ -89,13 +91,12 @@ const slice = createSlice({
       })
       .addCase(getRecipesWithParamAsync.rejected, (state, { error }) => {
         state.isLoading = false;
-        state.error = error.message || "Something went worng";
+        state.error = error.message || "Something went wrong";
       });
   },
 });
 
-export const useRecipesData = () =>
-  useSelector((state: RootState) => state.recipes);
+export const useRecipesData = () => useSelector(slice.selectors.recipesData);
 
 export const { clearRecipesBeforeApiResponse } = slice.actions;
 

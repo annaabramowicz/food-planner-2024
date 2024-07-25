@@ -6,7 +6,6 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
-import { RootState } from "store/store";
 
 type ThunkAPIConfig = {
   state: RootState;
@@ -38,6 +37,9 @@ export const removeIngredientFromFridgeAsync = createAsyncThunk<
 const slice = createSlice({
   name: "fridge",
   initialState: initialState,
+  selectors: {
+    fridgeData: (state) => state,
+  },
   reducers: {
     saveIngredientToFridge: (state, { payload }) => {
       state.ingredients.push(payload);
@@ -50,8 +52,7 @@ const slice = createSlice({
   },
 });
 
-export const useFridgeData = () =>
-  useSelector((state: RootState) => state.fridge);
+export const useFridgeData = () => useSelector(slice.selectors.fridgeData);
 
 export const { saveIngredientToFridge, removeIngredientFromFridge } =
   slice.actions;
