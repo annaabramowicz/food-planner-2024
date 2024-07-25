@@ -10,7 +10,7 @@ import {
 } from "app/style/theme/theme";
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
-import { useFridgeIngredients } from "hooks/useFridgeIngredients"; 
+import { useFridgeIngredients } from "hooks/useFridgeIngredients";
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -72,7 +72,7 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
           pos="absolute"
           backgroundColor={colorPrimary}
           color={colorFifth}
-          data-testid="checkmark"
+          role="checkmark"
         >
           <Icon as={IoCheckmark} height="15px" />
         </Circle>
