@@ -48,6 +48,7 @@ const SearchBar = (props: SearchBarProps) => {
         placeholder={placeholderValues}
         focusBorderColor={colorPrimary}
         fontSize="0.9em"
+        role="input"
       />
       <InputRightElement>{isLoading && <Spinner />}</InputRightElement>
     </InputGroup>
