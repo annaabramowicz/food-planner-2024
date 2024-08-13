@@ -1,16 +1,15 @@
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
+import { complexSearchApiResponse } from "./apiResponse";
+import config from "config/env";
 
 const handlers = [
-  // Intercept "GET https://example.com/user" requests...
-  http.get("https://example.com/user", () => {
-    // ...and respond to them using this JSON response.
-    return HttpResponse.json({
-      id: "c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d",
-      firstName: "John",
-      lastName: "Maverick",
-    });
-  }),
+  http.get(
+    `${config.apiUrl}recipes/complexSearch?number=15&minFat=0&minProtein=0&minCalories=0&minCarbs=0&apiKey=${config.apiKey}`,
+    () => {
+      return HttpResponse.json(complexSearchApiResponse);
+    }
+  ),
 ];
 
 export const server = setupServer(...handlers);

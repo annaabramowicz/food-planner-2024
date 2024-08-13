@@ -18,6 +18,8 @@ import FridgePage from "app/pages/FridgePage/FridgePage";
 import RecipesPage from "app/pages/RecipesPage/RecipesPage";
 import IngredientsPage from "app/pages/IngredientsPage/IngredientsPage";
 import { userEvent } from "@testing-library/user-event";
+import { complexSearchApiResponse } from "./Mocks/apiResponse";
+import config from "config/env";
 // import router from "routes/router";
 
 const router = createMemoryRouter([
@@ -82,5 +84,14 @@ describe("Searching recipes", () => {
     await userEvent.type(recipesInput, "A");
     expect(recipesInput).toHaveValue("A");
     screen.getByText("RECIPES PAGE");
+  });
+
+  it("fetches the recipes info", async () => {
+    const response = await fetch(
+      `${config.apiUrl}recipes/complexSearch?number=15&minFat=0&minProtein=0&minCalories=0&minCarbs=0&apiKey=${config.apiKey}`
+    );
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+    expect(await response.json()).toEqual(complexSearchApiResponse);
   });
 });
