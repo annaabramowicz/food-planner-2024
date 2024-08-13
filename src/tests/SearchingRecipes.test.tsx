@@ -1,13 +1,50 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { render, screen } from "@testing-library/react";
+import { logRoles, render, screen } from "@testing-library/react";
 import App from "app/App";
 import theme from "app/style/theme/theme";
 import { Provider } from "react-redux";
-import { RouterProvider } from "react-router-dom";
-import router from "routes/router";
+import {
+  createMemoryRouter,
+  MemoryRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import store from "store/store";
-import { beforeAll, describe, it } from "vitest";
-import { MemoryRouter } from "react-router-dom";
+import { beforeAll, describe, expect, it } from "vitest";
+import NotFoundPage from "app/pages/NonFoundPage/NonFoundPage";
+import HomePage from "app/pages/HomePage/HomePage";
+import FridgePage from "app/pages/FridgePage/FridgePage";
+import RecipesPage from "app/pages/RecipesPage/RecipesPage";
+import IngredientsPage from "app/pages/IngredientsPage/IngredientsPage";
+import { userEvent } from "@testing-library/user-event";
+// import router from "routes/router";
+
+const router = createMemoryRouter([
+  {
+    element: <App />,
+    errorElement: <NotFoundPage />,
+    path: "/",
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "ingredients",
+        element: <IngredientsPage />,
+      },
+      {
+        path: "recipes",
+        element: <RecipesPage />,
+      },
+      {
+        path: "fridge",
+        element: <FridgePage />,
+      },
+    ],
+  },
+]);
 
 beforeAll(() => {
   window.matchMedia =
@@ -22,17 +59,28 @@ beforeAll(() => {
 });
 
 describe("Searching recipes", () => {
-  it("User can search recipes", () => {
+  it("User can search recipes", async () => {
+    userEvent.setup();
     render(
       <ChakraProvider theme={theme}>
         <Provider store={store}>
-          <MemoryRouter initialEntries={["/home"]}>
-            <App />
-          </MemoryRouter>
+          <RouterProvider router={router} />
+          {/* <MemoryRouter>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="ingredients" element={<IngredientsPage />} />
+              </Route>
+            </Routes>
+          </MemoryRouter> */}
         </Provider>
       </ChakraProvider>
     );
-
-    screen.debug();
+    // screen.debug();
+    screen.getByText("Home ff");
+    const recipesInput = screen.getByRole("input");
+    await userEvent.type(recipesInput, "A");
+    expect(recipesInput).toHaveValue("A");
+    screen.getByText("RECIPES PAGE");
   });
 });

@@ -2,7 +2,8 @@ import Counter from "tests/Playground/Counter";
 
 const HomePage = () => (
   <>
-    Home <Counter />
+    Home ff
+    <Counter />
   </>
 );
 

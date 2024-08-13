@@ -6,6 +6,7 @@ const RecipesPage = () => {
 
   return (
     <>
+      RECIPES PAGE
       <RecipesList renderedRecipes={recipes} />
     </>
   );
