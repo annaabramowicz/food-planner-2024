@@ -1,4 +1,4 @@
-export const complexSearchApiResponse = {
+export const apiResponseComplexSearch = {
   results: [
     {
       id: 715415,
@@ -446,6 +446,464 @@ export const complexSearchApiResponse = {
           {
             name: "Carbohydrates",
             amount: 62.0975,
+            unit: "g",
+          },
+        ],
+      },
+    },
+  ],
+  offset: 0,
+  number: 15,
+  totalResults: 4978,
+};
+
+export const apiResponseWithSearchParamA = {
+  results: [
+    {
+      id: 651994,
+      title: "Miniature Fruit Tarts",
+      image: "https://img.spoonacular.com/recipes/651994-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 482.105,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 15.1517,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 6.73621,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 88.6641,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 654571,
+      title: "Panna Cotta with Raspberry and Orange Sauce",
+      image: "https://img.spoonacular.com/recipes/654571-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 395.653,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 7.88783,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 27.3146,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 28.0555,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 642583,
+      title: "Farfalle with Peas, Ham and Cream",
+      image: "https://img.spoonacular.com/recipes/642583-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 397.039,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 14.7253,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 15.9996,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 44.4384,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 665553,
+      title: "Yogurt Mousse With Raspberry Sauce",
+      image: "https://img.spoonacular.com/recipes/665553-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 637.51,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 12.5445,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 24.4205,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 89.6286,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 665767,
+      title: "Zucchini Pineapple Muffins",
+      image: "https://img.spoonacular.com/recipes/665767-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 155.587,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 3.49391,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 3.52126,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 27.4352,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 660185,
+      title: "Singapore Curry",
+      image: "https://img.spoonacular.com/recipes/660185-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 633.238,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 23.3405,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 27.9679,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 68.2868,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 641836,
+      title: "Easy Baked Parmesan Chicken",
+      image: "https://img.spoonacular.com/recipes/641836-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 496.99,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 62.0843,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 20.0345,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 12.5634,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 652497,
+      title: "Mouthwatering Mushroom Pie",
+      image: "https://img.spoonacular.com/recipes/652497-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 185.747,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 7.12086,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 11.5162,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 12.6703,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 653886,
+      title: "Orange Honey Madeleines",
+      image: "https://img.spoonacular.com/recipes/653886-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 42.0979,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 1.01511,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 1.06628,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 7.17265,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 636177,
+      title: "Broccoli Cheddar Soup",
+      image: "https://img.spoonacular.com/recipes/636177-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 330.676,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 17.3943,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 19.3783,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 20.1924,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 638893,
+      title: "Chocolate Cherry Cheesecake",
+      image: "https://img.spoonacular.com/recipes/638893-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 781.406,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 22.1082,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 46.0401,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 63.3011,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 651140,
+      title: "Marshmallow S'mores Bites",
+      image: "https://img.spoonacular.com/recipes/651140-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 54.1044,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 1.15394,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 1.53215,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 9.09342,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 642264,
+      title: "Eggless Ginger & Mango Bread",
+      image: "https://img.spoonacular.com/recipes/642264-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 464.229,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 9.8665,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 3.65518,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 94.0424,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 650744,
+      title: "Mango & Goat Cheese Quesadillas",
+      image: "https://img.spoonacular.com/recipes/650744-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 226.038,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 9.40618,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 8.81763,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 24.6151,
+            unit: "g",
+          },
+        ],
+      },
+    },
+    {
+      id: 632853,
+      title: "Asian Noodle Soup",
+      image: "https://img.spoonacular.com/recipes/632853-312x231.jpg",
+      imageType: "jpg",
+      nutrition: {
+        nutrients: [
+          {
+            name: "Calories",
+            amount: 61.5954,
+            unit: "kcal",
+          },
+          {
+            name: "Protein",
+            amount: 5.65297,
+            unit: "g",
+          },
+          {
+            name: "Fat",
+            amount: 0.718908,
+            unit: "g",
+          },
+          {
+            name: "Carbohydrates",
+            amount: 6.73015,
             unit: "g",
           },
         ],

@@ -18,7 +18,10 @@ import FridgePage from "app/pages/FridgePage/FridgePage";
 import RecipesPage from "app/pages/RecipesPage/RecipesPage";
 import IngredientsPage from "app/pages/IngredientsPage/IngredientsPage";
 import { userEvent } from "@testing-library/user-event";
-import { complexSearchApiResponse } from "./Mocks/apiResponse";
+import {
+  apiResponseComplexSearch,
+  apiResponseWithSearchParamA,
+} from "./Mocks/apiResponse";
 import config from "config/env";
 // import router from "routes/router";
 
@@ -81,9 +84,16 @@ describe("Searching recipes", () => {
     // screen.debug();
     screen.getByText("Home ff");
     const recipesInput = screen.getByRole("input");
-    await userEvent.type(recipesInput, "A");
-    expect(recipesInput).toHaveValue("A");
-    screen.getByText("RECIPES PAGE");
+    const searchParam = "A";
+    await userEvent.type(recipesInput, searchParam);
+    expect(recipesInput).toHaveValue(searchParam);
+    // screen.getByText("RECIPES PAGE");
+    const response = await fetch(
+      `${config.apiUrl}recipes/complexSearch?query=${searchParam}&number=15&minFat=0&minProtein=0&minCalories=0&minCarbs=0&apiKey=${config.apiKey}`
+    );
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+    expect(await response.json()).toEqual(apiResponseWithSearchParamA);
   });
 
   it("fetches the recipes info", async () => {
@@ -92,6 +102,6 @@ describe("Searching recipes", () => {
     );
     expect(response.status).toBe(200);
     expect(response.statusText).toBe("OK");
-    expect(await response.json()).toEqual(complexSearchApiResponse);
+    expect(await response.json()).toEqual(apiResponseComplexSearch);
   });
 });
