@@ -27,7 +27,7 @@ Instead "YOUR_KEY" paste your "API Key".
 
 4. Start app
 ```bash
-yarn start
+yarn dev
 ```
 
 You can also view website on https://food-planner-2024.vercel.app/
