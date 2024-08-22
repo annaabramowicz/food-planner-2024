@@ -1,10 +1,10 @@
 
 # Food Planner 
 
-Search, find and discover interesting movies, tv series and people related to cinema. Thanks to a clear interface, move very smoothly into page. You can check a lot of details. Data is fetching from an external [API](https://www.themoviedb.org/) and prepared appropriately. 
+Search, find, and discover interesting recipes. You can also easily compose your shopping list by searching for a variety of ingredients and adding them to your fridge. Data is fetching from an external [API](https://spoonacular.com/food-api) and prepared appropriately. 
 
 ## Configuration
-For the application to work properly, you have to generate a Bearer token. Without it, app will not work! 
+For the application to work properly, you have to generate API Key. Without it, app will not work! 
 1. Go to this [page](https://spoonacular.com/food-api) and create the user account.
 2. Go to account settings and find "Profile" tab.
 3. Find "Show / Hide API Key" and copy them.
