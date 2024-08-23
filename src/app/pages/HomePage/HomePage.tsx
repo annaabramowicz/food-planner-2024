@@ -1,10 +1,3 @@
-import Counter from "tests/Playground/Counter";
-
-const HomePage = () => (
-  <>
-    Home ff
-    <Counter />
-  </>
-);
+const HomePage = () => <>Home</>;
 
 export default HomePage;
