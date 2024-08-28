@@ -6,7 +6,7 @@ import Circle from "components/Circle/Circle";
 import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
 import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch } from "store/useAppDispatch";
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };

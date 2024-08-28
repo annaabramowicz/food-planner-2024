@@ -7,7 +7,7 @@ import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
 import { getInitialRecipesAsync } from "store/recipes/recipes";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch } from "store/useAppDispatch";
 
 function App() {
   const dispatch = useAppDispatch();

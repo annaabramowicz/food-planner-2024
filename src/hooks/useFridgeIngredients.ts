@@ -1,4 +1,4 @@
-import { useAppDispatch } from "store/store";
+import { useAppDispatch } from "store/useAppDispatch";
 import {
   removeIngredientFromFridgeAsync,
   saveIngredientToFridgeAsync,
