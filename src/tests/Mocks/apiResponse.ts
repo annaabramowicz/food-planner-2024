@@ -1,4 +1,4 @@
-export const apiResponseComplexSearch = {
+export const apiResponseComplexSearchForRecipes = {
   results: [
     {
       id: 715415,
@@ -457,7 +457,7 @@ export const apiResponseComplexSearch = {
   totalResults: 4978,
 };
 
-export const apiResponseWithSearchParamA = {
+export const apiResponseWithSearchParamAppleForRecipes = {
   results: [
     {
       id: 632502,
@@ -913,4 +913,62 @@ export const apiResponseWithSearchParamA = {
   offset: 0,
   number: 15,
   totalResults: 360,
+};
+
+export const apiResponseWithSearchParamCherryForIngredients = {
+  results: [
+    {
+      id: 9070,
+      name: "cherries",
+      image: "cherries.jpg",
+    },
+    {
+      id: 10619297,
+      name: "cherry jam",
+      image: "cherry-jam.jpg",
+    },
+    {
+      id: 93677,
+      name: "cherry juice",
+      image: "cherry-juice.jpg",
+    },
+    {
+      id: 10311529,
+      name: "cherry tomato",
+      image: "cherry-tomatoes.png",
+    },
+    {
+      id: 10419172,
+      name: "cherry flavored gelatin",
+      image: "red-jello.png",
+    },
+    {
+      id: 19314,
+      name: "cherry pie filling",
+      image: "cherry-pie-slice.jpg",
+    },
+    {
+      id: 99267,
+      name: "hot cherry pepper",
+      image: "peppadew-pepper.png",
+    },
+    {
+      id: 1019070,
+      name: "tart cherries",
+      image: "cherries.jpg",
+    },
+    {
+      id: 10011696,
+      name: "yellow cherry tomato",
+      image: "tomatoes-yellow.jpg",
+    },
+    {
+      id: 10843028,
+      name: "sugar free cherry jam",
+      image: "cherry-jam.jpg",
+    },
+  ],
+  offset: 0,
+  number: 10,
+  totalResults: 14,
 };
