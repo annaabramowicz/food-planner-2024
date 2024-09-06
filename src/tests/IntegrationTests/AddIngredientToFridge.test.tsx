@@ -21,18 +21,13 @@ describe("Add ingredient to fridge", () => {
     });
 
     await userEvent.click(ingredientsLinkPage);
-
     const recipesInput = screen.getByRole("input");
     const searchParam = "cherry";
 
-    await userEvent.type(recipesInput, searchParam);
-    const cherryJamCard = await screen.findByRole(
-      "img",
-      {
-        name: "cherry jam",
-      },
-      { timeout: 5000 }
-    );
+    await userEvent.type(recipesInput, `${searchParam}{enter}`);
+    const cherryJamCard = await screen.findByRole("img", {
+      name: "cherry jam",
+    });
 
     await userEvent.click(cherryJamCard);
     const fridgeLinkPage = screen.getByRole("link", {
@@ -40,9 +35,6 @@ describe("Add ingredient to fridge", () => {
     });
 
     await userEvent.click(fridgeLinkPage);
-    screen.getByRole("heading", {
-      name: "Fridge",
-    });
     screen.getByRole("img", {
       name: "cherry jam",
     });

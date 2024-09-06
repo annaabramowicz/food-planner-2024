@@ -17,7 +17,7 @@ type SearchBarProps = InputGroupProps;
 
 const SearchBar = (props: SearchBarProps) => {
   const isLoading = useLoadingState();
-  const handleChange = useSearch();
+  const { handleChange, handleKeyDown } = useSearch();
   const { pathname } = useLocation();
   const isCurrentRouteIngredients = pathname === "/ingredients";
 
@@ -44,6 +44,7 @@ const SearchBar = (props: SearchBarProps) => {
       </InputLeftElement>
       <Input
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         paddingLeft={10}
         placeholder={placeholderValues}
         focusBorderColor={colorPrimary}

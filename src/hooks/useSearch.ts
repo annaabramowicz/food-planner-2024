@@ -7,30 +7,38 @@ import { useAppDispatch } from "store/useAppDispatch";
 
 const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [submittedByEnter, setSubmittedByEnter] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isCurrentRouteIngredients = pathname === "/ingredients";
   const isCurrentRouteRecipes = pathname === "/recipes";
 
-  const postAction =
+  const navigateToRecipes =
     !isCurrentRouteIngredients && !isCurrentRouteRecipes
       ? () => navigate("/recipes")
-      : undefined;
+      : () => {};
 
   const searchBarAction = (value: string) =>
     isCurrentRouteIngredients
       ? dispatch(getIngredientsWithParamAsync(value))
       : dispatch(getRecipesWithParamAsync(value));
 
+  const executeSearch = (searchTerm: string) => {
+    if (navigateToRecipes && searchTerm) navigateToRecipes();
+    if (searchTerm !== "") {
+      searchBarAction(searchTerm);
+    }
+  };
+
   useDebounce(
     () => {
-      if (postAction && searchTerm) postAction();
-      if (searchTerm !== "") {
-        searchBarAction(searchTerm);
+      if (searchTerm && !submittedByEnter) {
+        executeSearch(searchTerm);
       }
+      setSubmittedByEnter(false);
     },
-    2000,
+    1000,
     [searchTerm]
   );
 
@@ -38,7 +46,14 @@ const useSearch = () => {
     setSearchTerm(e.target.value);
   };
 
-  return handleChange;
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSubmittedByEnter(true);
+      executeSearch(searchTerm);
+    }
+  };
+
+  return { handleChange, handleKeyDown };
 };
 
 export default useSearch;

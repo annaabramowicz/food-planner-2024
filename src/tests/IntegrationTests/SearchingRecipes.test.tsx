@@ -20,13 +20,9 @@ describe("Searching recipes", () => {
 
     const recipesInput = screen.getByRole("input");
     const searchParam = "apple";
-    await userEvent.type(recipesInput, searchParam);
-    await screen.findByRole(
-      "img",
-      {
-        name: "Neah's Fresh Apple Cake",
-      },
-      { timeout: 2200 }
-    );
+    await userEvent.type(recipesInput, `${searchParam}{enter}`);
+    await screen.findByRole("img", {
+      name: "Neah's Fresh Apple Cake",
+    });
   });
 });
