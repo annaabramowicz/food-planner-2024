@@ -38,7 +38,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "ts-check": "tsc --noEmit --project tsconfig.app.json",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "yarn test --coverage"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.3.1",
