@@ -39,6 +39,8 @@
     "preview": "vite preview",
     "ts-check": "tsc --noEmit --project tsconfig.app.json",
     "test": "vitest",
+    "test-integration": "vitest integrationTests",
+    "test-unit": "vitest units",
     "coverage": "yarn test --coverage"
   },
   "devDependencies": {
