@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import router from "routes/router";
 import store from "store/store";
 import { describe, expect, it } from "vitest";
-import { router } from "./RouterSetupTests";
 
 describe("Remove ingredient from fridge", () => {
   it("delete ingredient on the Fridge Page, after added them on the Ingredient Page", async () => {

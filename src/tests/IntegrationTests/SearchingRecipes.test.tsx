@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import store from "store/store";
 import { describe, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
-import { router } from "./RouterSetupTests";
+import router from "routes/router";
 
 describe("Searching recipes", () => {
   it("show image and title of the recipe on the Recipes Page, after entering the search term on the Home Page", async () => {

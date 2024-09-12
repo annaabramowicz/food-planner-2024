@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import router from "routes/router";
 import store from "store/store";
 import { describe, it } from "vitest";
-import { router } from "./RouterSetupTests";
 
 describe("Add ingredient to fridge", () => {
   it("show ingredient on the Fridge Page, after click searching ingredient on the Ingredient Page", async () => {
