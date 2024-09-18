@@ -1,9 +1,9 @@
 import Image from "components/Image/Image";
-import logoHeading from "./logoHeading.png";
+import logo from "./logo.png";
 
-const LogoHeading = () => (
+const Logo = () => (
   <Image
-    src={logoHeading}
+    src={logo}
     alt="Logo"
     objectFit="cover"
     boxSize="50px"
@@ -11,4 +11,4 @@ const LogoHeading = () => (
   />
 );
 
-export default LogoHeading;
+export default Logo;
