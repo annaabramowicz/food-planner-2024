@@ -3,9 +3,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import initialIngredients from "store/ingredients/initialIngredients";
 import config from "config/env";
+import { colorFifth, colorFourth } from "app/style/theme/theme";
 
 export default function IngredientsSlider() {
-  const imageSize = `250x250`;
+  const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
   const settings = {
     infinite: true,
@@ -32,9 +33,13 @@ export default function IngredientsSlider() {
   };
 
   const imageStyle: React.CSSProperties = {
-    height: "100px",
-    objectFit: "contain",
+    height: "150px",
+    width: "150px",
+    objectFit: "scale-down",
+    borderRadius: "50%",
+    border: `2px solid ${colorFourth}`,
     margin: "0 auto",
+    backgroundColor: colorFifth,
   };
 
   return (

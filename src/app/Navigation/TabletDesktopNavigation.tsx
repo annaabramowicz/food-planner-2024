@@ -14,7 +14,7 @@ function TabletDesktopNavigation() {
   const location = useLocation();
   return (
     <>
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" margin="0 30px">
         <Flex>
           <Box display={{ base: "none", sm: "block" }}>
             <NavigationLogo />
