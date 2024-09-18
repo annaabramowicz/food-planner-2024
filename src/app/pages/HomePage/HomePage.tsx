@@ -1,6 +1,7 @@
 import IngredientsSlider from "app/Slider/IngredientsSlider";
+import { colorPrimaryDark, fontFamilyPrimary } from "app/style/theme/theme";
 import Flex from "components/Flex/Flex";
-import Logo from "components/Logo/Logo";
+import Heading from "components/Heading/Heading";
 import Text from "components/Text/Text";
 
 const HomePage = () => {
@@ -10,7 +11,13 @@ const HomePage = () => {
       justifyContent="space-around"
       height={{ base: "75vh", sm: "80vh" }}
     >
-      <Logo />
+      <Heading
+        fontFamily={fontFamilyPrimary}
+        textColor={colorPrimaryDark}
+        fontSize="3em"
+      >
+        Food Planner
+      </Heading>
       <Text maxW={{ md: "1000px" }} fontSize={{ xl: "xl" }}>
         Search, find, and discover interesting recipes. You can also easily
         compose your shopping list by searching for a variety of ingredients and
