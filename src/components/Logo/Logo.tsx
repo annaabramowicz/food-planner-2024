@@ -1,8 +1,15 @@
 import Image from "components/Image/Image";
-import a from "./a.png";
+import logo from "./logo.png";
 
 const Logo = () => (
-  <Image src={a} alt="Logo" objectFit="cover" boxSize="50px" minWidth="50px" />
+  <Image
+    src={logo}
+    alt="Logo"
+    objectFit="cover"
+    boxSize="200px"
+    minWidth={{ lg: "250px" }}
+    marginTop={7}
+  />
 );
 
 export default Logo;

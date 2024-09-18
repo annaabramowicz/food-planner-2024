@@ -1,33 +1,23 @@
-// import ImageSlider from "app/Slider/Slider";
-import SimpleSlider from "app/Slider/SlimpleSlider";
-// import { colorPrimary, fontFamilyPrimary } from "app/style/theme/theme";
+import IngredientsSlider from "app/Slider/IngredientsSlider";
 import Flex from "components/Flex/Flex";
-// import Heading from "components/Heading/Heading";
-import LogoHeading from "components/Logo/LogoHeading";
+import Logo from "components/Logo/Logo";
 import Text from "components/Text/Text";
-// import { useIngredientsData } from "store/ingredients/ingredients";
 
 const HomePage = () => {
-  // const ingredients = useIngredientsData();
-
   return (
-    <Flex flexDirection="column" justifyContent="space-around" height="73vh">
-      {/* <Heading
-        fontFamily={fontFamilyPrimary}
-        color={colorPrimary}
-        textAlign="center"
-      >
-        Food Planner */}
-      {/* </Heading> */}
-      <LogoHeading />
-      <Text w={{ sm: "1000px" }}>
+    <Flex
+      flexDirection="column"
+      justifyContent="space-around"
+      height={{ base: "75vh", sm: "80vh" }}
+    >
+      <Logo />
+      <Text maxW={{ md: "1000px" }} fontSize={{ xl: "xl" }}>
         Search, find, and discover interesting recipes. You can also easily
         compose your shopping list by searching for a variety of ingredients and
         adding them to your fridge. Data is fetching from an external API and
         prepared appropriately.
       </Text>
-      {/* <ImageSlider ingredients={ingredients} /> */}
-      <SimpleSlider />
+      <IngredientsSlider />
     </Flex>
   );
 };

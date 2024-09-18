@@ -1,9 +1,9 @@
-import Logo from "components/Logo/Logo";
+import LogoHeading from "components/Logo/LogoHeading";
 import { NavLink } from "react-router-dom";
 
 const NavigationLogo = () => (
   <NavLink to="/">
-    <Logo />
+    <LogoHeading />
   </NavLink>
 );
 

@@ -1,13 +1,13 @@
 import Image from "components/Image/Image";
-import b from "./b.png";
+import logoHeading from "./logoHeading.png";
 
 const LogoHeading = () => (
   <Image
-    src={b}
+    src={logoHeading}
     alt="Logo"
     objectFit="cover"
-    boxSize="200px"
-    minWidth="200px"
+    boxSize="50px"
+    minWidth="50px"
   />
 );
 

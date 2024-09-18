@@ -20,7 +20,7 @@ function App() {
   return (
     <Box
       padding={{ base: "5px 10px", lg: "5px 30px" }}
-      overflowX="hidden"
+      overflow="hidden"
       paddingBottom={{ base: "120px", sm: "0" }}
     >
       <Navigation />

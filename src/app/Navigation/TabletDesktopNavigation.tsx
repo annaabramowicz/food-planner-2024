@@ -62,7 +62,7 @@ function TabletDesktopNavigation() {
             })}
           </Flex>
         </Flex>
-        <SearchBar minW="105px" w="200px" bg="white" />
+        <SearchBar minW="105px" w="230px" bg="white" />
       </Flex>
       <Box
         width="130%"
