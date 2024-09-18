@@ -4,10 +4,15 @@ import "slick-carousel/slick/slick-theme.css";
 import initialIngredients from "store/ingredients/initialIngredients";
 import config from "config/env";
 import { colorFifth, colorFourth } from "app/style/theme/theme";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 export default function IngredientsSlider() {
-  const imageSize = `100x100`;
-  const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
+  const imageUrlSize = useBreakpointValue({
+    base: `250x250`,
+    sm: `100x100`,
+  });
+
+  const imageUrl = `${config.apiCdnUrl}ingredients_${imageUrlSize}/`;
   const settings = {
     infinite: true,
     speed: 6000,
@@ -15,8 +20,14 @@ export default function IngredientsSlider() {
     slidesToScroll: 1,
     autoplay: true,
     adaptiveHeight: true,
-    autoplaySpeed: 10000,
+    autoplaySpeed: 1000,
     responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
       {
         breakpoint: 768,
         settings: {
@@ -31,19 +42,36 @@ export default function IngredientsSlider() {
       },
     ],
   };
+  const responsiveValues = useBreakpointValue({
+    base: {
+      circleSize: "200px",
+      padding: "30px",
+    },
+    sm: {
+      circleSize: "150px",
+      padding: "0px",
+    },
+  });
 
   const imageStyle: React.CSSProperties = {
-    height: "150px",
-    width: "150px",
+    height: responsiveValues?.circleSize,
+    width: responsiveValues?.circleSize,
     objectFit: "scale-down",
     borderRadius: "50%",
     border: `2px solid ${colorFourth}`,
     margin: "0 auto",
+    padding: responsiveValues?.padding,
     backgroundColor: colorFifth,
   };
 
   return (
-    <div style={{ width: "100%", marginTop: "40px" }}>
+    <div
+      style={{
+        width: "100%",
+        marginTop: "40px",
+        height: responsiveValues?.circleSize,
+      }}
+    >
       <Slider {...settings}>
         {initialIngredients.map((ingredient) => (
           <div key={ingredient.id}>
