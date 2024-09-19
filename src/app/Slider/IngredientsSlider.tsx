@@ -20,7 +20,7 @@ export default function IngredientsSlider() {
     slidesToScroll: 1,
     autoplay: true,
     adaptiveHeight: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 6000,
     arrows: false,
     responsive: [
       {
