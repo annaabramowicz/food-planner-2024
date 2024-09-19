@@ -9,7 +9,7 @@ const HomePage = () => {
     <Flex
       flexDirection="column"
       justifyContent="space-around"
-      height={{ base: "70vh", sm: "80vh" }}
+      height={{ base: "67vh", sm: "80vh" }}
     >
       <Heading
         fontFamily={fontFamilyPrimary}

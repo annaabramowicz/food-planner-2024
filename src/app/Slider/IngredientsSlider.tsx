@@ -21,6 +21,7 @@ export default function IngredientsSlider() {
     autoplay: true,
     adaptiveHeight: true,
     autoplaySpeed: 1000,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1280,
@@ -46,10 +47,12 @@ export default function IngredientsSlider() {
     base: {
       circleSize: "200px",
       padding: "30px",
+      width: "91%",
     },
     sm: {
       circleSize: "150px",
       padding: "0px",
+      width: "100%",
     },
   });
 
@@ -67,9 +70,8 @@ export default function IngredientsSlider() {
   return (
     <div
       style={{
-        width: "100%",
-        marginTop: "40px",
         height: responsiveValues?.circleSize,
+        width: responsiveValues?.width,
       }}
     >
       <Slider {...settings}>

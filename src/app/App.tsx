@@ -21,10 +21,9 @@ function App() {
   return (
     <Box
       padding={{ base: "5px 10px", lg: "5px 30px" }}
-      overflow={{ sm: "hidden" }}
+      overflowX={{ sm: "hidden" }}
       paddingBottom={{ base: "120px", sm: "0" }}
       backgroundColor={colorSeventh}
-      height="100vh"
     >
       <Navigation />
       {routes.map((route) =>
