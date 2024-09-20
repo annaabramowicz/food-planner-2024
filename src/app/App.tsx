@@ -24,6 +24,7 @@ function App() {
       overflowX={{ sm: "hidden" }}
       paddingBottom={{ base: "120px", sm: "0" }}
       backgroundColor={colorSeventh}
+      minH="100vh"
     >
       <Navigation />
       {routes.map((route) =>
