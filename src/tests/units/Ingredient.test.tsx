@@ -3,7 +3,6 @@ import user from "@testing-library/user-event";
 import Ingredient from "app/pages/IngredientsPage/IngredientsList/Ingredient/Ingredient";
 import { useFridgeData } from "store/fridge/fridge";
 import { useAppDispatch } from "store/useAppDispatch";
-
 import { describe, expect, it, vi } from "vitest";
 
 const useFridgeDataMock = vi.mocked(useFridgeData);
