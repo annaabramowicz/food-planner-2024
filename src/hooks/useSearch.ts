@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "react-use";
 import { getIngredientsWithParamAsync } from "store/ingredients/ingredients";
-import { getRecipesWithParamAsync } from "store/recipes/recipes";
+import { getRecipesWithParamThunk } from "store/recipes/recipes";
 import { useAppDispatch } from "store/useAppDispatch";
 
 const useSearch = () => {
@@ -22,7 +22,7 @@ const useSearch = () => {
   const searchBarAction = (value: string) =>
     isCurrentRouteIngredients
       ? dispatch(getIngredientsWithParamAsync(value))
-      : dispatch(getRecipesWithParamAsync(value));
+      : dispatch(getRecipesWithParamThunk(value));
 
   const executeSearch = (searchTerm: string) => {
     if (navigateToRecipes && searchTerm) navigateToRecipes();
