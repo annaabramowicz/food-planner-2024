@@ -4,18 +4,27 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import store from "store/store";
-import { describe, it } from "vitest";
-import { router } from "./RouterSetupTests";
+import { beforeEach, describe, it } from "vitest";
+import router from "routes/router";
+import {
+  getIngredientsFromLocalStorage,
+  saveIngredientInLocalStorage,
+} from "services/localStorage";
 
-describe.skip("Show ingredient from localStorage in Fridge Page", () => {
+beforeEach(() => {
+  const ingredient = {
+    id: 9279,
+    name: "purple plum",
+    image: "plum.jpg",
+  };
+  // window.localStorage.setItem("fridge", JSON.stringify(ingredient));
+  // localStorage.setItem("fridge", JSON.stringify(ingredient));
+  saveIngredientInLocalStorage(ingredient);
+  getIngredientsFromLocalStorage();
+});
+
+describe("Show ingredient from localStorage in Fridge Page", () => {
   it("If user have saved ingredient in localStorage, show them in Fridge Page", async () => {
-    const ingredient = {
-      id: 9037,
-      name: "avocados",
-      image: "avocado.jpg",
-    };
-    // window.localStorage.setItem("fridge", JSON.stringify(ingredient));
-
     // setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
     const view = render(
       <ChakraProvider theme={theme}>
@@ -31,19 +40,8 @@ describe.skip("Show ingredient from localStorage in Fridge Page", () => {
     await userEvent.click(fridgeLinkPage);
     logRoles(view.container);
 
-    // await userEvent.click(ingredientsLinkPage);
-    // const recipesInput = screen.getByRole("input");
-    // const searchParam = "cherry";
-
-    // await userEvent.type(recipesInput, `${searchParam}{enter}`);
-    // const cherryJamCard = await screen.findByRole("img", {
-    //   name: "cherry jam",
-    // });
-
-    // await userEvent.click(cherryJamCard);
-
     // screen.getByRole("img", {
-    //   name: "cherry jam",
+    //   name: "avocados",
     // });
   });
 });

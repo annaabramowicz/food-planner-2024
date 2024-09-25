@@ -23,7 +23,7 @@ describe("Remove ingredient from fridge", () => {
     await userEvent.click(ingredientsLinkPage);
 
     const lemonCard = await screen.findByRole("img", {
-      name: "lemon",
+      name: "ham",
     });
     await userEvent.click(lemonCard);
 
