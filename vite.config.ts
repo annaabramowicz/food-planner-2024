@@ -10,7 +10,7 @@ export default defineConfig({
     setupFiles: ["./src/tests/vitest.setup.ts"],
     coverage: {
       include: ["src/*"],
-      exclude: ["src/tests/*", "src/index.tsx"],
+      exclude: ["src/tests/*", "src/index.tsx", "src/vite-env.d.ts"],
     },
   },
 });
