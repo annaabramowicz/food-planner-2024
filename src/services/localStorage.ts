@@ -15,9 +15,9 @@ export const getIngredientsFromLocalStorage = () => {
   console.log("jestem w get Item");
   try {
     const value = localStorage.getItem(FRIDGE);
+    console.log("🚀 ~ getIngredientsFromLocalStorage ~ value:", value);
     if (value !== null) {
-      console.log("nie null");
-      console.log(value);
+      console.log("🚀 ~ getIngredientsFromLocalStorage ~ value:", value);
       return IngredientSchema.parse(JSON.parse(value));
     }
     return [];
@@ -32,11 +32,10 @@ export const getIngredientsFromLocalStorage = () => {
 };
 
 export const saveIngredientInLocalStorage = (ingredient: Ingredient) => {
-  console.log(ingredient);
+  console.log("🚀 ~ saveIngredientInLocalStorage ~ ingredient:", ingredient);
   const existingFridge = getIngredientsFromLocalStorage();
   const newFridge = [...existingFridge, ingredient];
-  console.log(`newFridge`);
-  console.log(newFridge);
+  console.log("🚀 ~ saveIngredientInLocalStorage ~ newFridge:", newFridge);
   try {
     localStorage.setItem(FRIDGE, JSON.stringify(newFridge));
   } catch (e) {
