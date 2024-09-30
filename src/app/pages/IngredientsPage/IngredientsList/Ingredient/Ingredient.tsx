@@ -10,7 +10,7 @@ import {
 } from "app/style/theme/theme";
 import { IoCheckmark } from "react-icons/io5";
 import config from "config/env";
-import { useFridgeIngredients } from "hooks/useFridgeIngredients"; 
+import { useFridgeIngredients } from "hooks/useFridgeIngredients";
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -46,6 +46,7 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
       onClick={toggleClick}
       flexDirection="column"
       pos="relative"
+      backgroundColor={colorFifth}
       minWidth={120}
       h={100}
       p="0 10px"
