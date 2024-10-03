@@ -5,7 +5,7 @@ import config from "config/env";
 import Circle from "components/Circle/Circle";
 import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
-import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
+import { removeIngredientFromFridgeThunk } from "store/fridge/fridge";
 import { useAppDispatch } from "store/useAppDispatch";
 
 type IngredientProps = {
@@ -23,7 +23,7 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
   const toggleClick = () => {
-    dispatch(removeIngredientFromFridgeAsync(ingredient.id));
+    dispatch(removeIngredientFromFridgeThunk(ingredient.id));
   };
 
   return (

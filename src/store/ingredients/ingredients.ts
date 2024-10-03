@@ -22,7 +22,7 @@ const initialState: InitialState = {
   error: null,
 };
 
-export const getIngredientsWithParamAsync = createAsyncThunk<
+export const getIngredientsWithParamThunk = createAsyncThunk<
   Ingredient[],
   string,
   ThunkAPIConfig
@@ -48,14 +48,14 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getIngredientsWithParamAsync.pending, (state) => {
+      .addCase(getIngredientsWithParamThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getIngredientsWithParamAsync.fulfilled, (state, { payload }) => {
+      .addCase(getIngredientsWithParamThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.ingredients = payload;
       })
-      .addCase(getIngredientsWithParamAsync.rejected, (state, { error }) => {
+      .addCase(getIngredientsWithParamThunk.rejected, (state, { error }) => {
         state.isLoading = false;
         state.error = error.message;
       });

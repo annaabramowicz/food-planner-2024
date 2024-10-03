@@ -13,11 +13,24 @@ type ThunkAPIConfig = {
   rejectValue: string;
 };
 
-const initialState = {
-  ingredients: getIngredientsFromLocalStorage(),
+type InitialState = {
+  ingredients: Ingredient[];
 };
 
-export const saveIngredientToFridgeAsync = createAsyncThunk<
+const initialState: InitialState = {
+  ingredients: [],
+};
+
+export const saveInitialIngredientsToFridgeThunk = createAsyncThunk<
+  void,
+  void,
+  ThunkAPIConfig
+>("saveInitialIngredientsToFridge", (_, thunkAPI) => {
+  const ingredients = getIngredientsFromLocalStorage();
+  thunkAPI.dispatch(saveInitialIngredientsToFridge(ingredients));
+});
+
+export const saveIngredientToFridgeThunk = createAsyncThunk<
   void,
   Ingredient,
   ThunkAPIConfig
@@ -26,7 +39,7 @@ export const saveIngredientToFridgeAsync = createAsyncThunk<
   thunkAPI.dispatch(saveIngredientToFridge(ingredient));
 });
 
-export const removeIngredientFromFridgeAsync = createAsyncThunk<
+export const removeIngredientFromFridgeThunk = createAsyncThunk<
   void,
   number,
   ThunkAPIConfig
@@ -45,6 +58,9 @@ const slice = createSlice({
     saveIngredientToFridge: (state, { payload }) => {
       state.ingredients.push(payload);
     },
+    saveInitialIngredientsToFridge: (state, { payload }) => {
+      state.ingredients = [...state.ingredients, ...payload];
+    },
     removeIngredientFromFridge: (state, { payload }) => {
       state.ingredients = state.ingredients.filter(
         (ingredient) => ingredient.id !== payload
@@ -55,7 +71,10 @@ const slice = createSlice({
 
 export const useFridgeData = () => useSelector(slice.selectors.fridgeData);
 
-export const { saveIngredientToFridge, removeIngredientFromFridge } =
-  slice.actions;
+export const {
+  saveIngredientToFridge,
+  saveInitialIngredientsToFridge,
+  removeIngredientFromFridge,
+} = slice.actions;
 
 export default slice.reducer;

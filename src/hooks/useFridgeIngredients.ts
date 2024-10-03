@@ -1,7 +1,7 @@
 import { useAppDispatch } from "store/useAppDispatch";
 import {
-  removeIngredientFromFridgeAsync,
-  saveIngredientToFridgeAsync,
+  removeIngredientFromFridgeThunk,
+  saveIngredientToFridgeThunk,
   useFridgeData,
 } from "store/fridge/fridge";
 import { Ingredient } from "lib/types";
@@ -11,9 +11,9 @@ export const useFridgeIngredients = () => {
   const dispatch = useAppDispatch();
 
   const removeFridgeIngredient = (id: number) =>
-    dispatch(removeIngredientFromFridgeAsync(id));
+    dispatch(removeIngredientFromFridgeThunk(id));
   const saveFridgeIngredient = (ingredient: Ingredient) =>
-    dispatch(saveIngredientToFridgeAsync(ingredient));
+    dispatch(saveIngredientToFridgeThunk(ingredient));
   const isIngredientInFridge = (id: number) =>
     ingredients.some((storeIngredient) => storeIngredient.id === id);
 

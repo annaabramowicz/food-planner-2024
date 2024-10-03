@@ -12,12 +12,9 @@ const IngredientSchema = z.array(
 const FRIDGE = "fridge";
 
 export const getIngredientsFromLocalStorage = () => {
-  console.log("jestem w get Item");
   try {
     const value = localStorage.getItem(FRIDGE);
-    console.log("🚀 ~ getIngredientsFromLocalStorage ~ value:", value);
     if (value !== null) {
-      console.log("🚀 ~ getIngredientsFromLocalStorage ~ value:", value);
       return IngredientSchema.parse(JSON.parse(value));
     }
     return [];
@@ -32,10 +29,8 @@ export const getIngredientsFromLocalStorage = () => {
 };
 
 export const saveIngredientInLocalStorage = (ingredient: Ingredient) => {
-  console.log("🚀 ~ saveIngredientInLocalStorage ~ ingredient:", ingredient);
   const existingFridge = getIngredientsFromLocalStorage();
   const newFridge = [...existingFridge, ingredient];
-  console.log("🚀 ~ saveIngredientInLocalStorage ~ newFridge:", newFridge);
   try {
     localStorage.setItem(FRIDGE, JSON.stringify(newFridge));
   } catch (e) {
