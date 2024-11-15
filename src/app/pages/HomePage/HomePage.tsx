@@ -8,8 +8,8 @@ const HomePage = () => {
   return (
     <Flex
       flexDirection="column"
-      justifyContent="space-around"
-      height={{ base: "67vh", sm: "80vh" }}
+      justifyContent="space-evenly"
+      height={{ base: "66vh", sm: "80vh" }}
     >
       <Heading
         fontFamily={fontFamilyPrimary}
