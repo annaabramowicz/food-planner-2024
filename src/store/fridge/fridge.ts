@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { Ingredient } from "lib/types";
 import { useSelector } from "react-redux";
 import {
@@ -6,26 +6,27 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
+import { useAppDispatch } from "store/store";
 
 const initialState = {
   ingredients: getIngredientsFromLocalStorage(),
 };
 
-export const saveIngredientToFridgeAsync = createAsyncThunk(
-  "saveIngredientToFridge",
-  (ingredient: Ingredient, thunkAPI) => {
-    saveIngredientInLocalStorage(ingredient);
-    thunkAPI.dispatch(saveIngredientToFridge(ingredient));
-  }
-);
+export const saveIngredient = (
+  ingredient: Ingredient,
+  dispatch: ReturnType<typeof useAppDispatch>
+) => {
+  saveIngredientInLocalStorage(ingredient);
+  dispatch(saveIngredientToFridge(ingredient));
+};
 
-export const removeIngredientFromFridgeAsync = createAsyncThunk(
-  "removeIngredientFromFridge",
-  (id: number, thunkAPI) => {
-    removeIngredientFromLocalStorage(id);
-    thunkAPI.dispatch(removeIngredientFromFridge(id));
-  }
-);
+export const removeIngredient = (
+  id: number,
+  dispatch: ReturnType<typeof useAppDispatch>
+) => {
+  removeIngredientFromLocalStorage(id);
+  dispatch(removeIngredientFromFridge(id));
+};
 
 const slice = createSlice({
   name: "fridge",
