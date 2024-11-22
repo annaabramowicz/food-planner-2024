@@ -21,8 +21,6 @@ export const getIngredientsFromLocalStorage = () => {
   } catch (e) {
     if (e instanceof Error) {
       console.error(`${e.name}: ${e.message}`);
-    } else {
-      console.error("An unknown error occurred");
     }
     return [];
   }
@@ -36,8 +34,6 @@ export const saveIngredientInLocalStorage = (ingredient: Ingredient) => {
   } catch (e) {
     if (e instanceof Error) {
       console.error(`${e.name}: ${e.message}`);
-    } else {
-      console.error("An unknown error occurred");
     }
   }
 };
@@ -50,8 +46,6 @@ export const removeIngredientFromLocalStorage = (id: number) => {
   } catch (e) {
     if (e instanceof Error) {
       console.error(`${e.name}: ${e.message}`);
-    } else {
-      console.error("An unknown error occurred");
     }
   }
 };
