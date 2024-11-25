@@ -6,8 +6,11 @@ import Box from "components/Box/Box";
 import routes from "routes/routes";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
-import { getInitialRecipesAsync } from "store/recipes/recipes";
-import { useAppDispatch } from "store/store";
+import { getInitialRecipesThunk } from "store/recipes/recipes";
+import { useAppDispatch } from "store/useAppDispatch";
+import { saveInitialIngredientsToFridgeThunk } from "store/fridge/fridge";
+// import { getInitialRecipesAsync } from "store/recipes/recipes";
+// import { useAppDispatch } from "store/store";
 import { colorSeventh } from "./style/theme/theme";
 
 function App() {
@@ -15,7 +18,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getInitialRecipesAsync());
+    dispatch(getInitialRecipesThunk());
+    dispatch(saveInitialIngredientsToFridgeThunk());
   }, [dispatch]);
 
   return (

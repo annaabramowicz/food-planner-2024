@@ -5,8 +5,8 @@ import config from "config/env";
 import Circle from "components/Circle/Circle";
 import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
-import { removeIngredientFromFridgeAsync } from "store/fridge/fridge";
-import { useAppDispatch } from "store/store";
+import { removeIngredientFromFridgeThunk } from "store/fridge/fridge";
+import { useAppDispatch } from "store/useAppDispatch";
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -23,7 +23,7 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
   const toggleClick = () => {
-    dispatch(removeIngredientFromFridgeAsync(ingredient.id));
+    dispatch(removeIngredientFromFridgeThunk(ingredient.id));
   };
 
   return (
@@ -57,6 +57,7 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
         bg={colorFifth}
         color={colorSixth}
         _hover={hoverUIstyle}
+        role="closeMark"
       >
         <Icon as={IoCloseOutline} height="20px" />
       </Circle>

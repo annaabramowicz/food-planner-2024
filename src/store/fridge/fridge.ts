@@ -6,26 +6,47 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
+import { RootState } from "store/store";
 
-const initialState = {
-  ingredients: getIngredientsFromLocalStorage(),
+type ThunkAPIConfig = {
+  state: RootState;
+  rejectValue: string;
 };
 
-export const saveIngredientToFridgeAsync = createAsyncThunk(
-  "saveIngredientToFridge",
-  (ingredient: Ingredient, thunkAPI) => {
-    saveIngredientInLocalStorage(ingredient);
-    thunkAPI.dispatch(saveIngredientToFridge(ingredient));
-  }
-);
+type InitialState = {
+  ingredients: Ingredient[];
+};
 
-export const removeIngredientFromFridgeAsync = createAsyncThunk(
-  "removeIngredientFromFridge",
-  (id: number, thunkAPI) => {
-    removeIngredientFromLocalStorage(id);
-    thunkAPI.dispatch(removeIngredientFromFridge(id));
-  }
-);
+const initialState: InitialState = {
+  ingredients: [],
+};
+
+export const saveInitialIngredientsToFridgeThunk = createAsyncThunk<
+  void,
+  void,
+  ThunkAPIConfig
+>("saveInitialIngredientsToFridge", (_, thunkAPI) => {
+  const ingredients = getIngredientsFromLocalStorage();
+  thunkAPI.dispatch(saveInitialIngredientsToFridge(ingredients));
+});
+
+export const saveIngredientToFridgeThunk = createAsyncThunk<
+  void,
+  Ingredient,
+  ThunkAPIConfig
+>("saveIngredientToFridge", (ingredient: Ingredient, thunkAPI) => {
+  saveIngredientInLocalStorage(ingredient);
+  thunkAPI.dispatch(saveIngredientToFridge(ingredient));
+});
+
+export const removeIngredientFromFridgeThunk = createAsyncThunk<
+  void,
+  number,
+  ThunkAPIConfig
+>("removeIngredientFromFridge", (id: number, thunkAPI) => {
+  removeIngredientFromLocalStorage(id);
+  thunkAPI.dispatch(removeIngredientFromFridge(id));
+});
 
 const slice = createSlice({
   name: "fridge",
@@ -37,6 +58,9 @@ const slice = createSlice({
     saveIngredientToFridge: (state, { payload }) => {
       state.ingredients.push(payload);
     },
+    saveInitialIngredientsToFridge: (state, { payload }) => {
+      state.ingredients = [...state.ingredients, ...payload];
+    },
     removeIngredientFromFridge: (state, { payload }) => {
       state.ingredients = state.ingredients.filter(
         (ingredient) => ingredient.id !== payload
@@ -47,7 +71,10 @@ const slice = createSlice({
 
 export const useFridgeData = () => useSelector(slice.selectors.fridgeData);
 
-export const { saveIngredientToFridge, removeIngredientFromFridge } =
-  slice.actions;
+export const {
+  saveIngredientToFridge,
+  saveInitialIngredientsToFridge,
+  removeIngredientFromFridge,
+} = slice.actions;
 
 export default slice.reducer;

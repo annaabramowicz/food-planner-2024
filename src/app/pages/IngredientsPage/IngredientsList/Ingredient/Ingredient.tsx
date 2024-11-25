@@ -73,6 +73,7 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
           pos="absolute"
           backgroundColor={colorPrimary}
           color={colorFifth}
+          role="checkmark"
         >
           <Icon as={IoCheckmark} height="15px" />
         </Circle>
