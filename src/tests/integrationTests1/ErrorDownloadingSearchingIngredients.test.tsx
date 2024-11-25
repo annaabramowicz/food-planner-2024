@@ -7,7 +7,7 @@ import store from "store/store";
 import { beforeEach, describe, expect, it } from "vitest";
 import router from "routes/router";
 import { http, HttpResponse } from "msw";
-import { server } from "tests/mocks/server";
+import { server } from "tests/mocks1/server";
 import config from "config/env";
 import userEvent from "@testing-library/user-event";
 
@@ -19,12 +19,20 @@ beforeEach(async () => {
         return new HttpResponse(null, { status: 500 });
       },
       { once: true }
+    ),
+    http.get(
+      `${config.apiUrl}food/ingredients/search`,
+      ({ request }) => {
+        new URL(request.url);
+        return new HttpResponse(null, { status: 500 });
+      },
+      { once: true }
     )
   );
 });
 
-describe("Error downloading initial recipes", () => {
-  it("don't show any recipes, after start application and switch to recipes page", async () => {
+describe("Error downloading searching ingredients", () => {
+  it("don't show searching ingredients, after entering the search term on the Ingredients Page", async () => {
     render(
       <ChakraProvider theme={theme}>
         <Provider store={store}>
@@ -34,11 +42,17 @@ describe("Error downloading initial recipes", () => {
     );
 
     const ingredientsLinkPage = screen.getByRole("link", {
-      name: "Recipes",
+      name: "Ingredients",
     });
     await userEvent.click(ingredientsLinkPage);
 
-    const allImg = await screen.queryAllByRole("img");
-    expect(allImg.length).toBe(0);
+    const recipesInput = screen.getByRole("input");
+    const searchParam = "cherry jam";
+    await userEvent.type(recipesInput, `${searchParam}{enter}`);
+
+    const cherryJamCard = screen.queryByRole("img", {
+      name: "cherry jam",
+    });
+    expect(cherryJamCard).not.toBeInTheDocument();
   });
 });
