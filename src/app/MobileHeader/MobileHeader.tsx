@@ -11,6 +11,7 @@ const MobileHeader = (props: MobileHeaderProps) => (
     fontFamily={fontFamilyPrimary}
     display={{ sm: "none" }}
     textAlign="left"
+    paddingTop={5}
     {...props}
   ></Heading>
 );

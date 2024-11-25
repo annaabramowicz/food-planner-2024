@@ -5,8 +5,7 @@ import config from "config/env";
 import Circle from "components/Circle/Circle";
 import { IoCloseOutline } from "react-icons/io5";
 import Icon from "components/Icon/Icon";
-import { removeIngredientFromFridgeThunk } from "store/fridge/fridge";
-import { useAppDispatch } from "store/useAppDispatch";
+import { useFridgeIngredients } from "hooks/useFridgeIngredients";
 
 type IngredientProps = {
   ingredient: { id: number; name: string; image: string };
@@ -18,12 +17,13 @@ const hoverUIstyle = {
 };
 
 const FridgeIngredient = ({ ingredient }: IngredientProps) => {
-  const dispatch = useAppDispatch();
+  const { removeFridgeIngredient } = useFridgeIngredients();
+
   const imageSize = `100x100`;
   const imageUrl = `${config.apiCdnUrl}ingredients_${imageSize}/`;
 
   const toggleClick = () => {
-    dispatch(removeIngredientFromFridgeThunk(ingredient.id));
+    removeFridgeIngredient(ingredient.id);
   };
 
   return (

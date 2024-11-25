@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { logRoles, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import theme from "app/style/theme/theme";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";

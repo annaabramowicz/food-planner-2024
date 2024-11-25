@@ -8,9 +8,6 @@ import MobileHeader from "./MobileHeader/MobileHeader";
 import SearchBar from "./SearchBar/SearchBar";
 import { getInitialRecipesThunk } from "store/recipes/recipes";
 import { useAppDispatch } from "store/useAppDispatch";
-import { saveInitialIngredientsToFridgeThunk } from "store/fridge/fridge";
-// import { getInitialRecipesAsync } from "store/recipes/recipes";
-// import { useAppDispatch } from "store/store";
 import { colorSeventh } from "./style/theme/theme";
 
 function App() {
@@ -19,7 +16,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getInitialRecipesThunk());
-    dispatch(saveInitialIngredientsToFridgeThunk());
   }, [dispatch]);
 
   return (
