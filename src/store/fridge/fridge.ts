@@ -6,9 +6,13 @@ import {
   saveIngredientInLocalStorage,
   removeIngredientFromLocalStorage,
 } from "services/localStorage";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch } from "store/useAppDispatch";
 
-const initialState = {
+type InitialState = {
+  ingredients: Ingredient[];
+};
+
+const initialState: InitialState = {
   ingredients: getIngredientsFromLocalStorage(),
 };
 
@@ -38,6 +42,9 @@ const slice = createSlice({
     saveIngredientToFridge: (state, { payload }) => {
       state.ingredients.push(payload);
     },
+    saveInitialIngredientsToFridge: (state, { payload }) => {
+      state.ingredients = [...state.ingredients, ...payload];
+    },
     removeIngredientFromFridge: (state, { payload }) => {
       state.ingredients = state.ingredients.filter(
         (ingredient) => ingredient.id !== payload
@@ -48,7 +55,10 @@ const slice = createSlice({
 
 export const useFridgeData = () => useSelector(slice.selectors.fridgeData);
 
-export const { saveIngredientToFridge, removeIngredientFromFridge } =
-  slice.actions;
+export const {
+  saveIngredientToFridge,
+  saveInitialIngredientsToFridge,
+  removeIngredientFromFridge,
+} = slice.actions;
 
 export default slice.reducer;

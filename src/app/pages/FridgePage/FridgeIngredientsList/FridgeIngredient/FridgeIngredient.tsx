@@ -57,6 +57,7 @@ const FridgeIngredient = ({ ingredient }: IngredientProps) => {
         bg={colorFifth}
         color={colorSixth}
         _hover={hoverUIstyle}
+        role="closeMark"
       >
         <Icon as={IoCloseOutline} height="20px" />
       </Circle>
