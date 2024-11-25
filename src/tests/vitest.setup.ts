@@ -4,22 +4,24 @@ import { beforeAll, afterEach, afterAll } from "vitest";
 import { server } from "./mocks/server";
 import userEvent from "@testing-library/user-event";
 
+global.matchMedia =
+  global.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
+
 afterEach(() => {
   cleanup();
+  () => server.resetHandlers();
 });
 
 beforeAll(() => {
   server.listen();
-  window.matchMedia =
-    window.matchMedia ||
-    function () {
-      return {
-        matches: false,
-        addListener: function () {},
-        removeListener: function () {},
-      };
-    };
   userEvent.setup();
 });
-afterEach(() => server.resetHandlers());
+
 afterAll(() => server.close());

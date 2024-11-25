@@ -46,6 +46,7 @@ const Ingredient = ({ ingredient }: IngredientProps) => {
       onClick={toggleClick}
       flexDirection="column"
       pos="relative"
+      backgroundColor={colorFifth}
       minWidth={120}
       h={100}
       p="0 10px"

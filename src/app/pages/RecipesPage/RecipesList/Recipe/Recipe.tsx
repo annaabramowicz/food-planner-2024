@@ -30,6 +30,7 @@ const Recipe = ({ recipe }: RecipeProps) => {
       borderRadius="lg"
       overflow="hidden"
       fontWeight="bold"
+      backgroundColor={colorFifth}
     >
       <Box pos="relative" h="148px">
         <Image
@@ -38,8 +39,6 @@ const Recipe = ({ recipe }: RecipeProps) => {
           loading="lazy"
           objectFit="cover"
           objectPosition="-10px -17px"
-          pos="relative"
-          zIndex="-1"
           height={{ base: "180px", sm: "204px" }}
         />
         <Tag

@@ -14,7 +14,7 @@ function TabletDesktopNavigation() {
   const location = useLocation();
   return (
     <>
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" margin="0 30px">
         <Flex>
           <Box display={{ base: "none", sm: "block" }}>
             <NavigationLogo />
@@ -62,7 +62,7 @@ function TabletDesktopNavigation() {
             })}
           </Flex>
         </Flex>
-        <SearchBar minW="105px" w="200px" bg="white" />
+        <SearchBar minW="105px" w="230px" bg="white" />
       </Flex>
       <Box
         width="130%"

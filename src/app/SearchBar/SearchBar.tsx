@@ -1,7 +1,12 @@
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
-import { colorFourth, colorPrimary, colorThird } from "app/style/theme/theme";
+import {
+  colorFifth,
+  colorFourth,
+  colorPrimary,
+  colorThird,
+} from "app/style/theme/theme";
 import Input from "components/Input/Input";
 import Icon from "components/Icon/Icon";
 import InputLeftElement from "components/Input/InputLeftElement/InputLeftElement";
@@ -34,7 +39,7 @@ const SearchBar = (props: SearchBarProps) => {
   return (
     <InputGroup
       borderRadius="md"
-      bg={colorFourth}
+      bg={colorFifth}
       borderColor={colorFourth}
       size="md"
       {...props}

@@ -9,6 +9,9 @@ import SearchBar from "./SearchBar/SearchBar";
 import { getInitialRecipesThunk } from "store/recipes/recipes";
 import { useAppDispatch } from "store/useAppDispatch";
 import { saveInitialIngredientsToFridgeThunk } from "store/fridge/fridge";
+// import { getInitialRecipesAsync } from "store/recipes/recipes";
+// import { useAppDispatch } from "store/store";
+import { colorSeventh } from "./style/theme/theme";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,8 +25,10 @@ function App() {
   return (
     <Box
       padding={{ base: "5px 10px", lg: "5px 30px" }}
-      overflowX="hidden"
+      overflowX={{ sm: "hidden" }}
       paddingBottom={{ base: "120px", sm: "0" }}
+      backgroundColor={colorSeventh}
+      minH="100vh"
     >
       <Navigation />
       {routes.map((route) =>
