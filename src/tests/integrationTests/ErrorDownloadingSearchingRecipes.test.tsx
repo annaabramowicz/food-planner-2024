@@ -7,7 +7,7 @@ import store from "store/store";
 import { beforeEach, describe, expect, it } from "vitest";
 import router from "routes/router";
 import { http, HttpResponse } from "msw";
-import { server } from "tests/mocks1/server";
+import { server } from "tests/mocks/server";
 import config from "config/env";
 import userEvent from "@testing-library/user-event";
 
