@@ -4,11 +4,7 @@ import { useRecipesData } from "store/recipes/recipes";
 const RecipesPage = () => {
   const { recipes } = useRecipesData();
 
-  return (
-    <>
-      <RecipesList renderedRecipes={recipes} />
-    </>
-  );
+  return <RecipesList renderedRecipes={recipes} />;
 };
 
 export default RecipesPage;
