@@ -19,10 +19,12 @@ const HomePage = () => {
         Food Planner
       </Heading>
       <Text maxW={{ md: "1000px" }} fontSize={{ xl: "xl" }}>
-        Search, find, and discover interesting recipes. You can also easily
-        compose your shopping list by searching for a variety of ingredients and
-        adding them to your fridge. Data is fetching from an external API and
-        prepared appropriately.
+        Discover interesting recipes and find inspiration for your meals.
+        Creating a shopping list has never been easier, just search for the
+        ingredients you need and add them to your virtual fridge. All data is
+        fetched from an external API and carefully prepared to make planning and
+        cooking simple and enjoyable. With everything at your fingertips, you
+        can focus on the joy of cooking without the hassle.
       </Text>
       <IngredientsSlider />
     </Flex>
