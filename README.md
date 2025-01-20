@@ -1,15 +1,15 @@
 
-# Food Planner 
+# ![android-icon-36x36](https://github.com/user-attachments/assets/c9253228-0f89-4a96-b94b-b85aaa1be3d8) Food Planner 
 
 Search, find, and discover interesting recipes. You can also easily compose your shopping list by searching for a variety of ingredients and adding them to your fridge. Data is fetching from an external [API](https://spoonacular.com/food-api) and prepared appropriately. 
 
-## Configuration
+## 🤖 Configuration
 For the application to work properly, you have to generate API Key. Without it, app will not work! 
 1. Go to this [page](https://spoonacular.com/food-api) and create the user account.
 2. Go to account settings and find "Profile" tab.
 3. Find "Show / Hide API Key" and copy them.
    
-## Project setup
+## 🚀 Project setup   
 
 1. Download this repository.
 ```bash
@@ -30,4 +30,4 @@ Instead "YOUR_KEY" paste your "API Key".
 yarn dev
 ```
 
-You can also view website on https://food-planner-2024.vercel.app/
+👉 You can also view website on https://food-planner-2024.vercel.app/
